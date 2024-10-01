@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-    Init("Sample Game 2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+    Init("Sample Game 2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 }
 
 Game::~Game()
@@ -12,6 +12,8 @@ Game::~Game()
 void Game::LoadGameObjects()
 {
     player = std::make_unique<Player>(*renderer);
+    map = std::make_unique<Map>(*renderer);
+    
     std::cout << "GameObjects Initialized.\n\n";
 }
 
@@ -85,6 +87,7 @@ void Game::Render() const
     SDL_RenderClear(renderer);
 
     // add stuff to render on the screen
+    map->DrawMap();
     player->Render();
     
     SDL_RenderPresent(renderer);

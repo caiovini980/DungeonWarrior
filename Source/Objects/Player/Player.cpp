@@ -7,7 +7,7 @@ Player::Player(SDL_Renderer& renderer)
     transform = std::make_unique<Transform>();
     
     sprite = std::make_unique<Sprite>(renderer);
-    sprite->SetTexture(&availableTextures[0]);
+    sprite->SetTexture(availableTextures[0]);
 }
 
 void Player::Render()
@@ -20,7 +20,7 @@ void Player::Render()
 
 void Player::Update()
 {
-    transform->SetScale(64, 64);
+    transform->SetScale(32, 32); // TODO: Change for default size on some 'config' file
     Move();
 }
 

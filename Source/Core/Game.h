@@ -4,6 +4,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "../Objects/Map/Map.h"
 #include "../Objects/Player/Player.h"
 
 class Game
@@ -30,4 +31,5 @@ private:
     void LoadGameObjects();
 
     std::unique_ptr<Player> player;
+    std::unique_ptr<Map> map;
 };

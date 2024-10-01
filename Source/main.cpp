@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
 
 	std::unique_ptr<Game> game = std::make_unique<Game>();
 
+	std::cout << "Starting game...\n\n";
 	while (game->IsGameRunning())
 	{
 		Uint32 frameStart = SDL_GetTicks();

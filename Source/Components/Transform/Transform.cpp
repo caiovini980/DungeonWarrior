@@ -3,7 +3,7 @@
 #include <memory>
 
 Transform::Transform()
-    : position(std::make_unique<Vector2>(0, 0)), scale(std::make_unique<Vector2>(0, 0))
+    : position(std::make_unique<Vector2>(0, 0)), scale(std::make_unique<Vector2>(32, 32))
 {
 }
 

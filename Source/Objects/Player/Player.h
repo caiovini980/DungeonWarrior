@@ -24,8 +24,9 @@ private:
     std::unique_ptr<Sprite> sprite;
     std::unique_ptr<Transform> transform;
 
-    const char* availableTextures {
-        "Assets/Sprites/player.png"
+    const char* availableTextures[2] {
+        "Assets/Sprites/player.png",
+        "Assets/Sprites/player_green.png"
     };
     
     float count{0.0f};

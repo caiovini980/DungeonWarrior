@@ -171,6 +171,8 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Objects\Map\Map.cpp" />
+    <ClCompile Include="Source\Objects\Map\Tile.cpp" />
     <ClCompile Include="Source\Objects\Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -253,11 +255,16 @@
     <ClInclude Include="Source\Components\Transform\Transform.h" />
     <ClInclude Include="Source\Core\Game.h" />
     <ClInclude Include="Source\Interfaces\GameObject.h" />
+    <ClInclude Include="Source\Objects\Map\Map.h" />
+    <ClInclude Include="Source\Objects\Map\Tile.h" />
     <ClInclude Include="Source\Objects\Player\Player.h" />
     <ClInclude Include="Source\Utils\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Sprites\floor.png" />
+    <Content Include="Assets\Sprites\player_green.png" />
     <Content Include="Assets\Sprites\player.png" />
+    <Content Include="Assets\Sprites\wall.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
