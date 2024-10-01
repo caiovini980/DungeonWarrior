@@ -1,6 +1,6 @@
 # Project specific
-SDLExample/
-x64/
+SDLExample
+x64
 
 
 ##### Windows
@@ -1048,5 +1048,3 @@ dkms.conf
 *.uf2
 # Raspberry Pi Pico disassembler file
 *.dis
-SDLExample
-x64
