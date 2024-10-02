@@ -8,12 +8,13 @@
 
 #include "../../Components/Sprite/Sprite.h"
 #include "../../Components/Transform/Transform.h"
+#include "../../Utils/ConfigHandler.h"
 
 
 class Player : GameObject
 {
 public:
-    Player(SDL_Renderer& renderer);
+    Player(SDL_Renderer& renderer, ConfigHandler& configHandler);
     void Render() override;
     void Update() override;
     void Destroy() override;
@@ -23,6 +24,8 @@ public:
 private:
     std::unique_ptr<Sprite> sprite;
     std::unique_ptr<Transform> transform;
+
+    PlayerConfig& config;
 
     const char* availableTextures[2] {
         "Assets/Sprites/player.png",

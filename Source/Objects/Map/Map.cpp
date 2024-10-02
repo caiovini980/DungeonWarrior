@@ -1,6 +1,7 @@
 ﻿#include "Map.h"
 
-Map::Map(SDL_Renderer& renderer)
+Map::Map(SDL_Renderer& renderer, ConfigHandler& configHandler)
+    : tileConfig(configHandler.GetTileConfig()), mapsConfig(configHandler.GetMapsConfig())
 {
     for (int row = 0; row < static_cast<int>(map.size()); row++)
      {
@@ -8,9 +9,9 @@ Map::Map(SDL_Renderer& renderer)
          {
              const char* texturePath{ GetTexturePathByID(map[row][column]) };
              Vector2 tilePosition{ static_cast<float>(column), static_cast<float>(row) };
-             Vector2 tileSize{ tileSizeX, tileSizeY };
+             Vector2 tileSize{ tileConfig.sizeX, tileConfig.sizeY };
              
-             tileMap.emplace_back(renderer, texturePath);
+             tileMap.emplace_back(renderer, texturePath, configHandler);
              tileMap.back().SetTileSize(tileSize);
              tileMap.back().SetTilePosition(tilePosition);
          }

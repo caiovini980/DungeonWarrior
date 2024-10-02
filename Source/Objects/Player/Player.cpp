@@ -2,12 +2,13 @@
 
 #include <iostream>
 
-Player::Player(SDL_Renderer& renderer)
+Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
+    : config(configHandler.GetPlayerConfig())
 {
     transform = std::make_unique<Transform>();
     
     sprite = std::make_unique<Sprite>(renderer);
-    sprite->SetTexture(availableTextures[0]);
+    sprite->SetTexture(availableTextures[config.textureIndex]);
 }
 
 void Player::Render()
@@ -20,7 +21,7 @@ void Player::Render()
 
 void Player::Update()
 {
-    transform->SetScale(32, 32); // TODO: Change for default size on some 'config' file
+    transform->SetScale(config.sizeX, config.sizeY);
     Move();
 }
 
@@ -31,6 +32,6 @@ void Player::Destroy()
 void Player::Move()
 {
     count++;
-    transform->SetPosition(count, transform->GetPosition().y);
+    transform->SetPosition(count * config.speed, transform->GetPosition().y);
 }
 

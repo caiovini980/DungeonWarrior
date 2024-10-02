@@ -1,15 +1,15 @@
 ﻿#pragma once
 #include "../../Components/Sprite/Sprite.h"
 #include "../../Components/Transform/Transform.h"
-#include "../../Interfaces/GameObject.h"
+#include "../../Utils/ConfigHandler.h"
 
 class Tile
 {
 public:
-    Tile(SDL_Renderer& renderer, const char* texturePath);
+    Tile(SDL_Renderer& renderer, const char* texturePath, ConfigHandler& configHandler);
     
     ~Tile();
-    void Render();
+    void Render() const;
     void Update();
     void Destroy();
     

@@ -1,8 +1,9 @@
 ﻿#include "Game.h"
 
-Game::Game()
+Game::Game(ConfigHandler& configHandler)
+     : configHandler(configHandler), config(configHandler.GetWindowConfig())
 {
-    Init("Sample Game 2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+    Init(config.title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, config.width, config.height, false);
 }
 
 Game::~Game()
@@ -11,8 +12,8 @@ Game::~Game()
 
 void Game::LoadGameObjects()
 {
-    player = std::make_unique<Player>(*renderer);
-    map = std::make_unique<Map>(*renderer);
+    player = std::make_unique<Player>(*renderer, configHandler);
+    map = std::make_unique<Map>(*renderer, configHandler);
     
     std::cout << "GameObjects Initialized.\n\n";
 }

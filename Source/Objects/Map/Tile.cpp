@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Tile::Tile(SDL_Renderer& renderer, const char* texturePath)
+Tile::Tile(SDL_Renderer& renderer, const char* texturePath, ConfigHandler& configHandler)
 {
     transform = std::make_shared<Transform>();
     sprite = std::make_shared<Sprite>(renderer);
@@ -28,7 +28,7 @@ void Tile::SetTileSize(const Vector2& newSize) const
     transform->SetScale(newSize.x, newSize.y);
 }
 
-void Tile::Render()
+void Tile::Render() const
 {
     if (sprite->GetTexture() != nullptr && sprite->GetRenderer() != nullptr)
     {

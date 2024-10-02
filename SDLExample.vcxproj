@@ -248,6 +248,7 @@
       <AdditionalIncludeDirectories>D:\DLLs\SDL2_image-2.0.1\include;D:\DLLs\SDL\include;;C:\dev\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Source\Utils\ConfigHandler.cpp" />
     <ClCompile Include="Source\Utils\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +259,7 @@
     <ClInclude Include="Source\Objects\Map\Map.h" />
     <ClInclude Include="Source\Objects\Map\Tile.h" />
     <ClInclude Include="Source\Objects\Player\Player.h" />
+    <ClInclude Include="Source\Utils\ConfigHandler.h" />
     <ClInclude Include="Source\Utils\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +267,13 @@
     <Content Include="Assets\Sprites\player_green.png" />
     <Content Include="Assets\Sprites\player.png" />
     <Content Include="Assets\Sprites\wall.png" />
+    <Content Include="Settings\MapsConfig.json" />
+    <Content Include="Settings\PlayerConfig.json" />
+    <Content Include="Settings\TileConfig.json" />
+    <Content Include="Settings\WindowConfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Libraries\" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

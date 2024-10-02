@@ -6,11 +6,12 @@
 #include "SDL_image.h"
 #include "../Objects/Map/Map.h"
 #include "../Objects/Player/Player.h"
+#include "../Utils/ConfigHandler.h"
 
 class Game
 {
 public:
-    Game();
+    Game(ConfigHandler& configHandler);
     ~Game();
 
     void Init(const char* title, int xPosition, int yPosition, int width, int height, bool fullscreen);
@@ -22,14 +23,17 @@ public:
     bool IsGameRunning() const;
 
 private:
-    int count{0};
-    bool isRunning{false};
-    
     SDL_Window* window;
     SDL_Renderer* renderer;
 
-    void LoadGameObjects();
-
     std::unique_ptr<Player> player;
     std::unique_ptr<Map> map;
+    
+    ConfigHandler& configHandler;
+    WindowConfig& config;
+    
+    int count{0};
+    bool isRunning{false};
+
+    void LoadGameObjects();
 };
