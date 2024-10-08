@@ -4,6 +4,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "../Objects/Input/InputSystem.h"
 #include "../Objects/Map/Map.h"
 #include "../Objects/Player/Player.h"
 #include "../Utils/ConfigHandler.h"
@@ -26,6 +27,10 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
 
+    // Systems
+    std::unique_ptr<InputSystem> inputSystem;
+
+    // Game objects
     std::unique_ptr<Player> player;
     std::unique_ptr<Map> map;
     
@@ -36,4 +41,5 @@ private:
     bool isRunning{false};
 
     void LoadGameObjects();
+    void LoadGameSystems();
 };

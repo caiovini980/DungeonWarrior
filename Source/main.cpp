@@ -5,8 +5,8 @@
 
 int main(int argc, char* argv[])
 {
-	const unsigned int FPS = 60;
-	const unsigned int frameDelay = 1000/FPS;
+	constexpr unsigned int FPS = 60;
+	constexpr unsigned int frameDelay = 1000/FPS;
 
 	// Load config files
 	std::shared_ptr<ConfigHandler> configHandler = std::make_shared<ConfigHandler>();

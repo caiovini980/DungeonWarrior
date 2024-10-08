@@ -22,16 +22,52 @@ void Player::Render()
 void Player::Update()
 {
     transform->SetScale(config.sizeX, config.sizeY);
-    Move();
 }
 
 void Player::Destroy()
 {
 }
 
-void Player::Move()
+void Player::ProcessInput(const InputState& state)
 {
-    count++;
-    transform->SetPosition(count * config.speed, transform->GetPosition().y);
+    CheckVerticalMovement(state);
+    CheckHorizontalMovement(state);
 }
+
+void Player::CheckVerticalMovement(const InputState& state)
+{
+    KeyboardState keyboardState = state.keyboardState;
+    
+    // Move vertically
+    if (keyboardState.GetKeyState(SDL_SCANCODE_S) == Held)
+    {
+        verticalStepCount++;
+    }
+
+    if (keyboardState.GetKeyState(SDL_SCANCODE_W) == Held)
+    {
+        verticalStepCount--;
+    }
+    
+    transform->SetPosition(transform->GetPosition().x, verticalStepCount * config.speed);
+}
+
+void Player::CheckHorizontalMovement(const InputState& state)
+{
+    KeyboardState keyboardState = state.keyboardState;
+    
+    // Move horizontally
+    if (keyboardState.GetKeyState(SDL_SCANCODE_A) == Held)
+    {
+        horizontalStepCount--;
+    }
+
+    if (keyboardState.GetKeyState(SDL_SCANCODE_D) == Held)
+    {
+        horizontalStepCount++;
+    }
+    
+    transform->SetPosition(horizontalStepCount * config.speed, transform->GetPosition().y);
+}
+
 

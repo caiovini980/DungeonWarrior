@@ -5,6 +5,7 @@ ConfigHandler::ConfigHandler()
     LoadWindowConfigs();
     LoadPlayerConfigs();
     LoadTileConfigs();
+    LoadMapConfigs(0);
 }
 
 ConfigHandler::~ConfigHandler()
@@ -59,8 +60,17 @@ void ConfigHandler::LoadWindowConfigs()
     windowConfig.height = windowData["height"].get<const int>();
     windowConfig.title = windowData["title"].get<const std::string>();
     windowConfig.fullscreen = windowData["fullscreen"].get<const bool>();
+}
 
-    
+void ConfigHandler::LoadMapConfigs(int mapId)
+{
+    JSON mapData = GetParsedJSON(MAP_CONFIG_PATH);
+    auto requestedMapInfo = mapData["maps"][mapId];
+        
+    // TODO maybe remove these strings?
+    mapsConfig.rows = requestedMapInfo["rows"].get<const int>();
+    mapsConfig.columns = requestedMapInfo["columns"].get<const int>();
+    mapsConfig.layout = requestedMapInfo["layout"].get<const std::vector<std::vector<int>>>();
 }
 
 PlayerConfig& ConfigHandler::GetPlayerConfig()

@@ -9,6 +9,7 @@
 #include "../../Components/Sprite/Sprite.h"
 #include "../../Components/Transform/Transform.h"
 #include "../../Utils/ConfigHandler.h"
+#include "../Input/InputSystem.h"
 
 
 class Player : GameObject
@@ -19,19 +20,23 @@ public:
     void Update() override;
     void Destroy() override;
 
-    void Move();
+    void ProcessInput(const InputState& state);
+
+    void CheckHorizontalMovement(const InputState& state);
+    void CheckVerticalMovement(const InputState& state);
     
 private:
     std::unique_ptr<Sprite> sprite;
     std::unique_ptr<Transform> transform;
 
-    PlayerConfig& config;
+    PlayerConfig config;
 
     const char* availableTextures[2] {
         "Assets/Sprites/player.png",
         "Assets/Sprites/player_green.png"
     };
     
-    float count{0.0f};
+    float horizontalStepCount{0.0f};
+    float verticalStepCount{0.0f};
 
 };

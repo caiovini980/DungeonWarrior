@@ -3,11 +3,13 @@
 Map::Map(SDL_Renderer& renderer, ConfigHandler& configHandler)
     : tileConfig(configHandler.GetTileConfig()), mapsConfig(configHandler.GetMapsConfig())
 {
-    for (int row = 0; row < static_cast<int>(map.size()); row++)
+    mapsConfig = configHandler.GetMapsConfig();
+    
+    for (int row = 0; row < mapsConfig.rows; row++)
      {
-         for (int column = 0; column < static_cast<int>(map[row].size()); column++)
+         for (int column = 0; column < mapsConfig.columns; column++)
          {
-             const char* texturePath{ GetTexturePathByID(map[row][column]) };
+             const char* texturePath{ GetTexturePathByID(mapsConfig.layout[row][column]) };
              Vector2 tilePosition{ static_cast<float>(column), static_cast<float>(row) };
              Vector2 tileSize{ tileConfig.sizeX, tileConfig.sizeY };
              

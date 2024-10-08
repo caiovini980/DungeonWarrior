@@ -171,6 +171,8 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Objects\Input\InputSystem.cpp" />
+    <ClCompile Include="Source\Objects\Input\KeyboardState.cpp" />
     <ClCompile Include="Source\Objects\Map\Map.cpp" />
     <ClCompile Include="Source\Objects\Map\Tile.cpp" />
     <ClCompile Include="Source\Objects\Player\Player.cpp">
@@ -256,6 +258,8 @@
     <ClInclude Include="Source\Components\Transform\Transform.h" />
     <ClInclude Include="Source\Core\Game.h" />
     <ClInclude Include="Source\Interfaces\GameObject.h" />
+    <ClInclude Include="Source\Objects\Input\InputSystem.h" />
+    <ClInclude Include="Source\Objects\Input\KeyboardState.h" />
     <ClInclude Include="Source\Objects\Map\Map.h" />
     <ClInclude Include="Source\Objects\Map\Tile.h" />
     <ClInclude Include="Source\Objects\Player\Player.h" />

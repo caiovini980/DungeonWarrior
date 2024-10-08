@@ -18,6 +18,14 @@ void Game::LoadGameObjects()
     std::cout << "GameObjects Initialized.\n\n";
 }
 
+
+void Game::LoadGameSystems()
+{
+    inputSystem = std::make_unique<InputSystem>();
+    
+    std::cout << "Systems Initialized.\n\n";
+}
+
 void Game::Init(const char* title, int xPosition, int yPosition, int width, int height, bool fullscreen)
 {
     int flags = 0;
@@ -58,11 +66,14 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
 
     isRunning = true;
 
+    LoadGameSystems();
     LoadGameObjects();
 }
 
 void Game::HandleEvents()
 {
+    inputSystem->PrepareForUpdate();
+    
     SDL_Event event;
     SDL_PollEvent(&event);
 
@@ -80,6 +91,12 @@ void Game::HandleEvents()
 void Game::Update()
 {
     count++;
+    inputSystem->Update();
+    const InputState& state = inputSystem->GetState();
+
+    // process input
+    player->ProcessInput(state);
+    
     player->Update();
 }
 
