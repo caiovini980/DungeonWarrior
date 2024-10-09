@@ -58,10 +58,7 @@ void Player::ProcessInput(const InputState& state)
     }
 
     Vector2 normDir = movementDirection.Normalized();
-
-    normDir.x *= config.speed;
-    normDir.y *= config.speed;
+    normDir *= config.speed;
     
     transform->AddPosition(normDir);
 }
-
