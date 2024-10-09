@@ -28,6 +28,8 @@ public:
 private:
     std::unique_ptr<Sprite> sprite;
     std::unique_ptr<Transform> transform;
+    
+    Vector2 movementDirection{0.0f, 0.0f};
 
     PlayerConfig config;
 

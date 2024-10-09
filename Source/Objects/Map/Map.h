@@ -1,10 +1,7 @@
 ﻿#pragma once
-#include <array>
-#include <SDL_rect.h>
 #include <SDL_render.h>
 #include <vector>
 
-#include "../../Components/Sprite/Sprite.h"
 #include "Tile.h"
 #include "../../Utils/ConfigHandler.h"
 
@@ -18,21 +15,6 @@ public:
 
 private:
     const char* GetTexturePathByID(int i) const;
-    
-    // std::array<std::array<int, 15>, 10> map = { // X, Y
-    //     {
-    //         {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-    //         {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-    //         {1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    //         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    //         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    //         {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1},
-    //         {1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
-    //         {1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
-    //         {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    //         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //     }
-    // };
 
     std::vector<Tile> tileMap;
 

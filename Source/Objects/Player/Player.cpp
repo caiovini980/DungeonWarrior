@@ -30,44 +30,38 @@ void Player::Destroy()
 
 void Player::ProcessInput(const InputState& state)
 {
-    CheckVerticalMovement(state);
-    CheckHorizontalMovement(state);
-}
-
-void Player::CheckVerticalMovement(const InputState& state)
-{
     KeyboardState keyboardState = state.keyboardState;
-    
+
+    movementDirection.x = 0.0f;
+    movementDirection.y = 0.0f;
+
     // Move vertically
     if (keyboardState.GetKeyState(SDL_SCANCODE_S) == Held)
     {
-        verticalStepCount++;
+        movementDirection.y = 1;
     }
 
     if (keyboardState.GetKeyState(SDL_SCANCODE_W) == Held)
     {
-        verticalStepCount--;
+        movementDirection.y = -1;
     }
-    
-    transform->SetPosition(transform->GetPosition().x, verticalStepCount * config.speed);
-}
 
-void Player::CheckHorizontalMovement(const InputState& state)
-{
-    KeyboardState keyboardState = state.keyboardState;
-    
     // Move horizontally
     if (keyboardState.GetKeyState(SDL_SCANCODE_A) == Held)
     {
-        horizontalStepCount--;
+        movementDirection.x = -1;
     }
 
     if (keyboardState.GetKeyState(SDL_SCANCODE_D) == Held)
     {
-        horizontalStepCount++;
+        movementDirection.x = 1;
     }
-    
-    transform->SetPosition(horizontalStepCount * config.speed, transform->GetPosition().y);
-}
 
+    Vector2 normDir = movementDirection.Normalized();
+
+    normDir.x *= config.speed;
+    normDir.y *= config.speed;
+    
+    transform->AddPosition(normDir);
+}
 

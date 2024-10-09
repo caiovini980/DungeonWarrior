@@ -12,6 +12,10 @@ public:
     ~Transform();
 
     void SetPosition(float x, float y);
+    void SetPosition(const Vector2& newPosition);
+
+    void AddPosition(const Vector2& addedPosition);
+    
     void SetScale(float x, float y);
     
     Vector2& GetPosition() const;

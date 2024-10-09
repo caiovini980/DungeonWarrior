@@ -20,6 +20,16 @@ void Transform::SetPosition(float x, float y)
     position->y = y;
 }
 
+void Transform::SetPosition(const Vector2& newPosition)
+{
+    SetPosition(newPosition.x, newPosition.y);
+}
+
+void Transform::AddPosition(const Vector2& addedPosition)
+{
+    SetPosition(position->x + addedPosition.x, position->y + addedPosition.y);
+}
+
 void Transform::SetScale(float x, float y)
 {
     resultRect.w = static_cast<int>(x);
