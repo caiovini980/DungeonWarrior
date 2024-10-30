@@ -12,8 +12,10 @@ Game::~Game()
 
 void Game::LoadGameObjects()
 {
-    player = std::make_unique<Player>(*renderer, configHandler);
+    player = std::make_shared<Player>(*renderer, configHandler);
     map = std::make_unique<Map>(*renderer, configHandler);
+
+    inputManager = std::make_unique<InputManager>(player);
     
     std::cout << "GameObjects Initialized.\n\n";
 }
@@ -95,8 +97,7 @@ void Game::Update()
     const InputState& state = inputSystem->GetState();
 
     // process input
-    player->ProcessInput(state);
-    
+    inputManager->HandleInput(state);
     player->Update();
 }
 

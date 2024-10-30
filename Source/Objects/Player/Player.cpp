@@ -1,7 +1,5 @@
 ﻿#include "Player.h"
 
-#include <iostream>
-
 Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
     : config(configHandler.GetPlayerConfig())
 {
@@ -21,6 +19,11 @@ void Player::Render()
 
 void Player::Update()
 {
+    UpdatePosition();
+    
+    movementDirection.x = 0.0f;
+    movementDirection.y = 0.0f;
+    
     transform->SetScale(config.sizeX, config.sizeY);
 }
 
@@ -28,37 +31,30 @@ void Player::Destroy()
 {
 }
 
-void Player::ProcessInput(const InputState& state)
+void Player::UpdatePosition() const
 {
-    KeyboardState keyboardState = state.keyboardState;
-
-    movementDirection.x = 0.0f;
-    movementDirection.y = 0.0f;
-
-    // Move vertically
-    if (keyboardState.GetKeyState(SDL_SCANCODE_S) == Held)
-    {
-        movementDirection.y = 1;
-    }
-
-    if (keyboardState.GetKeyState(SDL_SCANCODE_W) == Held)
-    {
-        movementDirection.y = -1;
-    }
-
-    // Move horizontally
-    if (keyboardState.GetKeyState(SDL_SCANCODE_A) == Held)
-    {
-        movementDirection.x = -1;
-    }
-
-    if (keyboardState.GetKeyState(SDL_SCANCODE_D) == Held)
-    {
-        movementDirection.x = 1;
-    }
-
     Vector2 normDir = movementDirection.Normalized();
     normDir *= config.speed;
     
     transform->AddPosition(normDir);
+}
+
+void Player::MoveRight()
+{
+    movementDirection.x = 1;
+}
+
+void Player::MoveLeft()
+{
+    movementDirection.x = -1;
+}
+
+void Player::MoveUp()
+{
+    movementDirection.y = -1;
+}
+
+void Player::MoveDown()
+{
+    movementDirection.y = 1;
 }

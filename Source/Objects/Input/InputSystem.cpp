@@ -11,9 +11,7 @@ InputSystem::~InputSystem()
 
 void InputSystem::Initialize()
 {
-    // Assign current state pointer
     state.keyboardState.currentState = SDL_GetKeyboardState(nullptr);
-    // Clear previous state memory
     SDL_memset(state.keyboardState.previousState, 0, SDL_NUM_SCANCODES);
 }
 

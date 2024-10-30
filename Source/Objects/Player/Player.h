@@ -11,7 +11,6 @@
 #include "../../Utils/ConfigHandler.h"
 #include "../Input/InputSystem.h"
 
-
 class Player : GameObject
 {
 public:
@@ -20,10 +19,12 @@ public:
     void Update() override;
     void Destroy() override;
 
-    void ProcessInput(const InputState& state);
+    void UpdatePosition() const;
 
-    void CheckHorizontalMovement(const InputState& state);
-    void CheckVerticalMovement(const InputState& state);
+    void MoveRight();
+    void MoveLeft();
+    void MoveUp();
+    void MoveDown();
     
 private:
     std::unique_ptr<Sprite> sprite;
@@ -37,8 +38,4 @@ private:
         "Assets/Sprites/player.png",
         "Assets/Sprites/player_green.png"
     };
-    
-    float horizontalStepCount{0.0f};
-    float verticalStepCount{0.0f};
-
 };
