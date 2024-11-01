@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{3824E0A7-24C6-0A7E-0D81-1ED2F9C191CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Sprites">
+      <UniqueIdentifier>{B1E2C0E5-9DB0-B4EB-8644-251272B19050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{0259E1F6-6EC3-956D-B701-471323AB73C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\nlohmann">
+      <UniqueIdentifier>{4C77C263-385B-83B9-A1BB-7D0C8DBE6D3B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Settings">
+      <UniqueIdentifier>{F63FCA8A-E20C-2596-0B26-133EF7515A24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{56EB95D1-428D-C0A7-2B48-D4FB178947F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Commands">
+      <UniqueIdentifier>{57A7BC16-C332-2ADB-CC43-ADCF384E86DB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Components">
+      <UniqueIdentifier>{AB4E1BC0-1765-1956-60DC-A477CC31EADD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Components\Sprite">
+      <UniqueIdentifier>{911D49FE-7D42-987E-A68D-7D0E9211979C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Components\Transform">
+      <UniqueIdentifier>{36B8DB91-A2C5-0978-2BAC-056397B8D52E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{6E95150F-DA4A-8E04-633F-88DBCFF38408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Interfaces">
+      <UniqueIdentifier>{E9CD5691-55E4-5427-9E5B-E0480AB125AF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Objects">
+      <UniqueIdentifier>{0F80BE01-FB4D-B207-E4E1-222ED04E8E6C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Objects\Input">
+      <UniqueIdentifier>{4EBF51EC-3A4E-DBB5-E36C-EFB0CFDAEB5B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Objects\Map">
+      <UniqueIdentifier>{DC0929BE-C8ED-E913-314E-E4661D51D495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Objects\Player">
+      <UniqueIdentifier>{4B6AB186-B7D6-6C81-80CA-04DFECF58EE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utils">
+      <UniqueIdentifier>{369510F3-22F8-9F97-CB7D-D84DB7BF6B1A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Libraries\nlohmann\json.hpp">
+      <Filter>Libraries\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\nlohmann\json_fwd.hpp">
+      <Filter>Libraries\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Commands\MoveDownCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Commands\MoveLeftCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Commands\MoveRightCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Commands\MoveUpCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\Sprite\Sprite.h">
+      <Filter>Source\Components\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\Transform\Transform.h">
+      <Filter>Source\Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Game.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\Command.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\GameObject.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Objects\Input\InputManager.h">
+      <Filter>Source\Objects\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Objects\Input\InputSystem.h">
+      <Filter>Source\Objects\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Objects\Input\KeyboardState.h">
+      <Filter>Source\Objects\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Objects\Map\Map.h">
+      <Filter>Source\Objects\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Objects\Map\Tile.h">
+      <Filter>Source\Objects\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Objects\Player\Player.h">
+      <Filter>Source\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\ConfigHandler.h">
+      <Filter>Source\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\Vector2.h">
+      <Filter>Source\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Components\Sprite\Sprite.cpp">
+      <Filter>Source\Components\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Components\Transform\Transform.cpp">
+      <Filter>Source\Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Game.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Objects\Input\InputManager.cpp">
+      <Filter>Source\Objects\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Objects\Input\InputSystem.cpp">
+      <Filter>Source\Objects\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Objects\Input\KeyboardState.cpp">
+      <Filter>Source\Objects\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Objects\Map\Map.cpp">
+      <Filter>Source\Objects\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Objects\Map\Tile.cpp">
+      <Filter>Source\Objects\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Objects\Player\Player.cpp">
+      <Filter>Source\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils\ConfigHandler.cpp">
+      <Filter>Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils\Vector2.cpp">
+      <Filter>Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings\MapsConfig.json">
+      <Filter>Settings</Filter>
+    </None>
+    <None Include="Settings\PlayerConfig.json">
+      <Filter>Settings</Filter>
+    </None>
+    <None Include="Settings\TileConfig.json">
+      <Filter>Settings</Filter>
+    </None>
+    <None Include="Settings\WindowConfig.json">
+      <Filter>Settings</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Sprites\floor.png">
+      <Filter>Assets\Sprites</Filter>
+    </Image>
+    <Image Include="Assets\Sprites\player.png">
+      <Filter>Assets\Sprites</Filter>
+    </Image>
+    <Image Include="Assets\Sprites\player_green.png">
+      <Filter>Assets\Sprites</Filter>
+    </Image>
+    <Image Include="Assets\Sprites\wall.png">
+      <Filter>Assets\Sprites</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
