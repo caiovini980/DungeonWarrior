@@ -7,8 +7,8 @@ This game was originally created to experiment C++ with SDL, but it became more 
 * Use external libraries on a C++ project
 * Implement design patterns commonly used in game development
 * Create make files to help with the project build for any platform, here is used [Premake](https://premake.github.io/)
-- Use some newer features of C++ such as smart pointers
-- Write a decent README
+* Use some newer features of C++ such as smart pointers
+* Write a decent README
 
 ## Current result
 https://github.com/user-attachments/assets/39037cf8-19c1-4367-9e5a-687c106058e8
