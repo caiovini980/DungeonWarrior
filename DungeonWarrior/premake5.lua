@@ -15,9 +15,9 @@ project "DungeonWarrior"
         "Settings/**.json",
     }
 
-    includedirs { "../Include/SDL/include", "../Include/SDL2_image/include" } -- C/C++ -> General -> Additional Include Directories
+    includedirs { "../Include/required-includes" } -- C/C++ -> General -> Additional Include Directories
     
-    libdirs { "../Include/SDL/lib/x64", "../Include/SDL2_image/lib/x64" } -- Linker -> General -> Additional Library Directories
+    libdirs { "../Include/required-libs" } -- Linker -> General -> Additional Library Directories
 
     links { -- Linker -> Input -> Additional Dependencies
         "SDL2", 
