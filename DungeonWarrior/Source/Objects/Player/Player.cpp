@@ -4,9 +4,14 @@ Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
     : config(configHandler.GetPlayerConfig())
 {
     transform = std::make_unique<Transform>();
+    transform->SetPosition(100, 100);
     
     sprite = std::make_unique<Sprite>(renderer);
     sprite->SetTexture(availableTextures[config.textureIndex]);
+
+    // TODO change the way we get this tag, maybe add it to some global file
+    // TODO Create this on a separated class
+    collider = std::make_unique<BoxCollider>(*transform, tag);
 }
 
 void Player::Render()
@@ -25,6 +30,7 @@ void Player::Update()
     movementDirection.y = 0.0f;
     
     transform->SetScale(config.sizeX, config.sizeY);
+    collider->UpdateCollider();
 }
 
 void Player::Destroy()
@@ -57,4 +63,14 @@ void Player::MoveUp()
 void Player::MoveDown()
 {
     movementDirection.y = 1;
+}
+
+BoxCollider& Player::GetCollider() const
+{
+    if (collider == nullptr)
+    {
+        std::cerr << "ERROR: Class 'Player' don't have a collider.\n";
+    }
+    
+    return *collider;
 }

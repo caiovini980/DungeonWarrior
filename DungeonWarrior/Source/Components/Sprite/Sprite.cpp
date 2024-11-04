@@ -12,6 +12,8 @@ Sprite::Sprite(SDL_Renderer& renderer)
 
 Sprite::~Sprite()
 {
+    SDL_DestroyTexture(texture);
+    free(renderer);
 }
 
 void Sprite::SetTexture(const char* imagePath)

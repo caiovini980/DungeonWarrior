@@ -2,30 +2,33 @@
 
 #include <iostream>
 
-Tile::Tile(SDL_Renderer& renderer, const char* texturePath, ConfigHandler& configHandler)
+Tile::Tile(SDL_Renderer& renderer, const char* texturePath, std::string& tag)
 {
     transform = std::make_shared<Transform>();
     sprite = std::make_shared<Sprite>(renderer);
 
     sprite->SetTexture(texturePath);
-    std::cout << "Creating tile!\n";
-}
-
-Tile::~Tile()
-{
+    
+    // TODO change the way we get this tag, maybe add it to some global file
+    collider = std::make_unique<BoxCollider>(*transform, tag);
 }
 
 void Tile::SetTilePosition(const Vector2& newPosition) const
 {
     transform->SetPosition(
-        newPosition.x * transform->GetScale().x,
-        newPosition.y * transform->GetScale().y
+        newPosition.x * transform->GetSize().x,
+        newPosition.y * transform->GetSize().y
         );
 }
 
 void Tile::SetTileSize(const Vector2& newSize) const
 {
     transform->SetScale(newSize.x, newSize.y);
+}
+
+BoxCollider& Tile::GetCollider() const
+{
+    return *collider;
 }
 
 void Tile::Render() const

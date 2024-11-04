@@ -7,10 +7,6 @@ Vector2::Vector2(float x, float y)
 {
 }
 
-Vector2::~Vector2()
-{
-}
-
 float Vector2::Magnitude() const
 {
     return std::sqrtf((x * x) + (y * y));

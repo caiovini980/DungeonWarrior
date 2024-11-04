@@ -24,6 +24,7 @@ void Game::LoadGameObjects()
 void Game::LoadGameSystems()
 {
     inputSystem = std::make_unique<InputSystem>();
+    collisionManager = std::make_unique<CollisionManager>();
     
     std::cout << "Systems Initialized.\n\n";
 }
@@ -106,6 +107,20 @@ void Game::Update()
     // process input
     inputManager->HandleInput(state);
     player->Update();
+
+    // check collisions
+    // player & walls
+    for (auto& tile : map->GetMapTiles())
+    {
+        // TODO change the way we get this tag, maybe add it to some global file
+        if (tile.GetCollider().GetTag() == wallTag)
+        {
+            if(collisionManager->CheckCollision(player->GetCollider(), tile.GetCollider()))
+            {
+                std::cout << "Colliding with Wall!\n";
+            }
+        }
+    }
 }
 
 void Game::Render() const

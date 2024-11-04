@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <SDL_rect.h>
+#include <string>
 
 #include "../../Utils/Vector2.h"
 
@@ -9,7 +10,6 @@ class Transform
 {
 public:
     Transform();
-    ~Transform();
 
     void SetPosition(float x, float y);
     void SetPosition(const Vector2& newPosition);
@@ -19,7 +19,7 @@ public:
     void SetScale(float x, float y);
     
     Vector2& GetPosition() const;
-    Vector2& GetScale() const;
+    Vector2& GetSize() const;
 
     SDL_Rect* GetResultTransform();
 

@@ -9,17 +9,18 @@ class Map
 {
 public:
     Map(SDL_Renderer& renderer, ConfigHandler& configHandler);
-    ~Map();
 
     void DrawMap();
+
+    std::vector<Tile>& GetMapTiles();
 
 private:
     const char* GetTexturePathByID(int i) const;
 
     std::vector<Tile> tileMap;
 
-    TileConfig tileConfig;
-    MapsConfig mapsConfig;
+    std::unique_ptr<TileConfig> tileConfig;
+    std::unique_ptr<MapsConfig> mapsConfig;
     
     const char* floorTexturePath{ "Assets/Sprites/floor.png" };
     const char* wallTexturePath{ "Assets/Sprites/wall.png" };

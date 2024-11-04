@@ -4,6 +4,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "../Components/Collision/CollisionManager.h"
 #include "../Objects/Input/InputManager.h"
 #include "../Objects/Input/InputSystem.h"
 #include "../Objects/Map/Map.h"
@@ -30,6 +31,7 @@ private:
 
     // Managers
     std::unique_ptr<InputManager> inputManager;
+    std::unique_ptr<CollisionManager> collisionManager;
     
     // Systems
     std::unique_ptr<InputSystem> inputSystem;
@@ -40,6 +42,8 @@ private:
     
     ConfigHandler& configHandler;
     WindowConfig& config;
+    
+    std::string wallTag{"wall"};
     
     int count{0};
     bool isRunning{false};

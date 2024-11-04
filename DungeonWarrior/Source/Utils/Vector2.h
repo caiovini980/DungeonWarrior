@@ -4,7 +4,6 @@ class Vector2
 {
 public:
     Vector2(float x = 0.0f, float y = 0.0f);
-    ~Vector2();
     
     float Magnitude() const;
     Vector2 Normalized() const;
@@ -12,8 +11,7 @@ public:
     float x{0.0f};
     float y{0.0f};
 
-    // overload
-    // Multiply
+    // overloads
     Vector2 operator* (float scalar) const
     {
         return Vector2{x * scalar, y * scalar};
@@ -24,5 +22,15 @@ public:
         x *= scalar;
         y *= scalar;
         return *this;
+    }
+
+    Vector2 operator- (const Vector2& other) const
+    {
+        return Vector2{x - other.x, y - other.y};
+    }
+
+    Vector2 operator+ (const Vector2& other) const
+    {
+        return Vector2{x + other.x, y + other.y};
     }
 };

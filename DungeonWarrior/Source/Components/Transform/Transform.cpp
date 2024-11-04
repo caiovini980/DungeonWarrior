@@ -5,11 +5,9 @@
 Transform::Transform()
     : position(std::make_unique<Vector2>(0, 0)), scale(std::make_unique<Vector2>(32, 32))
 {
+    
 }
 
-Transform::~Transform()
-{
-}
 
 void Transform::SetPosition(float x, float y)
 {
@@ -44,7 +42,7 @@ Vector2& Transform::GetPosition() const
     return *position;
 }
 
-Vector2& Transform::GetScale() const
+Vector2& Transform::GetSize() const
 {
     return *scale;
 }
