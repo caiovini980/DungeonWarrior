@@ -24,10 +24,10 @@ public:
     SDL_Rect* GetResultTransform();
 
 private:
-    std::unique_ptr<Vector2> position;
-    std::unique_ptr<Vector2> scale;
+    std::unique_ptr<Vector2> m_Position;
+    std::unique_ptr<Vector2> m_Scale;
     // rotation?
 
-    SDL_Rect resultRect;
-    SDL_Rect sourceRect;
+    SDL_Rect m_ResultRect;
+    SDL_Rect m_SourceRect;
 };

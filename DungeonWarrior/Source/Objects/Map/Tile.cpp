@@ -4,38 +4,38 @@
 
 Tile::Tile(SDL_Renderer& renderer, const char* texturePath, std::string& tag)
 {
-    transform = std::make_shared<Transform>();
-    sprite = std::make_shared<Sprite>(renderer);
+    m_Transform = std::make_shared<Transform>();
+    m_Sprite = std::make_shared<Sprite>(renderer);
 
-    sprite->SetTexture(texturePath);
+    m_Sprite->SetTexture(texturePath);
     
     // TODO change the way we get this tag, maybe add it to some global file
-    collider = std::make_unique<BoxCollider>(*transform, tag);
+    m_Collider = std::make_unique<BoxCollider>(*m_Transform, tag);
 }
 
 void Tile::SetTilePosition(const Vector2& newPosition) const
 {
-    transform->SetPosition(
-        newPosition.x * transform->GetSize().x,
-        newPosition.y * transform->GetSize().y
+    m_Transform->SetPosition(
+        newPosition.m_X * m_Transform->GetSize().m_X,
+        newPosition.m_Y * m_Transform->GetSize().m_Y
         );
 }
 
 void Tile::SetTileSize(const Vector2& newSize) const
 {
-    transform->SetScale(newSize.x, newSize.y);
+    m_Transform->SetScale(newSize.m_X, newSize.m_Y);
 }
 
 BoxCollider& Tile::GetCollider() const
 {
-    return *collider;
+    return *m_Collider;
 }
 
 void Tile::Render() const
 {
-    if (sprite->GetTexture() != nullptr && sprite->GetRenderer() != nullptr)
+    if (m_Sprite->GetTexture() != nullptr && m_Sprite->GetRenderer() != nullptr)
     {
-        SDL_RenderCopy(sprite->GetRenderer(), sprite->GetTexture(), nullptr, transform->GetResultTransform());
+        SDL_RenderCopy(m_Sprite->GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
     }
 }
 

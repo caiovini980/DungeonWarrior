@@ -25,8 +25,8 @@ public:
     // Get a state based on current and previous frame
     ButtonState GetKeyState(SDL_Scancode keyCode) const;
     
-    const Uint8* currentState;
-    Uint8 previousState[SDL_NUM_SCANCODES];
+    const Uint8* m_CurrentState;
+    Uint8 m_PreviousState[SDL_NUM_SCANCODES];
 
 private:
 };

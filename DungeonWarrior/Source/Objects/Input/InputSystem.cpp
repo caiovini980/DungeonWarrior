@@ -11,8 +11,8 @@ InputSystem::~InputSystem()
 
 void InputSystem::Initialize()
 {
-    state.keyboardState.currentState = SDL_GetKeyboardState(nullptr);
-    SDL_memset(state.keyboardState.previousState, 0, SDL_NUM_SCANCODES);
+    m_State.keyboardState.m_CurrentState = SDL_GetKeyboardState(nullptr);
+    SDL_memset(m_State.keyboardState.m_PreviousState, 0, SDL_NUM_SCANCODES);
 }
 
 void InputSystem::Shutdown()
@@ -22,7 +22,7 @@ void InputSystem::Shutdown()
 void InputSystem::PrepareForUpdate()
 {
     // copy from the current buffer to the previous buffer
-    SDL_memcpy(state.keyboardState.previousState, state.keyboardState.currentState, SDL_NUM_SCANCODES);
+    SDL_memcpy(m_State.keyboardState.m_PreviousState, m_State.keyboardState.m_CurrentState, SDL_NUM_SCANCODES);
 }
 
 void InputSystem::Update()
@@ -31,5 +31,5 @@ void InputSystem::Update()
 
 const InputState& InputSystem::GetState() const
 {
-    return state;
+    return m_State;
 }

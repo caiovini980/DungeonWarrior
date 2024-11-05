@@ -13,6 +13,6 @@ public:
     SDL_Renderer* GetRenderer() const;
 
 private:
-    SDL_Renderer* renderer;
-    SDL_Texture* texture;
+    SDL_Renderer* m_Renderer;
+    SDL_Texture* m_Texture;
 };

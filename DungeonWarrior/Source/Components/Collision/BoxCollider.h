@@ -16,8 +16,8 @@ public:
     
 private:
     
-    std::shared_ptr<Transform> transform;
+    std::shared_ptr<Transform> m_Transform;
+    std::unique_ptr<std::string> m_Tag;
     
-    SDL_Rect collider;
-    std::unique_ptr<std::string> tag;
+    SDL_Rect m_Collider;
 };

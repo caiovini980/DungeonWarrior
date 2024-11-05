@@ -16,11 +16,10 @@ public:
     void HandleInput(const InputState& state) const;
 
 private:
-    std::shared_ptr<Player> player;
+    std::shared_ptr<Player> m_Player;
     
-    std::unique_ptr<Command> buttonD;
-    std::unique_ptr<Command> buttonA;
-    
-    std::unique_ptr<Command> buttonW;
-    std::unique_ptr<Command> buttonS;
+    std::unique_ptr<Command> m_ButtonD;
+    std::unique_ptr<Command> m_ButtonA;
+    std::unique_ptr<Command> m_ButtonW;
+    std::unique_ptr<Command> m_ButtonS;
 };

@@ -54,19 +54,19 @@ public:
     WindowConfig& GetWindowConfig();
 
 private:
-    const std::string PLAYER_CONFIG_PATH{ "./Settings/PlayerConfig.json" };
-    const std::string TILE_CONFIG_PATH{ "./Settings/TileConfig.json" };
-    const std::string WINDOW_CONFIG_PATH{ "./Settings/WindowConfig.json" };
-    const std::string MAP_CONFIG_PATH{ "./Settings/MapsConfig.json" };
+    const std::unique_ptr<std::string> PLAYER_CONFIG_PATH{ std::make_unique<std::string>("./Settings/PlayerConfig.json") };
+    const std::unique_ptr<std::string> TILE_CONFIG_PATH{ std::make_unique<std::string>("./Settings/TileConfig.json") };
+    const std::unique_ptr<std::string> WINDOW_CONFIG_PATH{ std::make_unique<std::string>("./Settings/WindowConfig.json") };
+    const std::unique_ptr<std::string> MAP_CONFIG_PATH{ std::make_unique<std::string>("./Settings/MapsConfig.json") };
     
     void LoadPlayerConfigs();
     void LoadTileConfigs();
     void LoadWindowConfigs();
     void LoadMapConfigs(int mapId);
 
-    PlayerConfig playerConfig;
-    MapsConfig mapsConfig;
-    TileConfig tileConfig;
-    WindowConfig windowConfig;
+    PlayerConfig m_PlayerConfig;
+    MapsConfig m_MapsConfig;
+    TileConfig m_TileConfig;
+    WindowConfig m_WindowConfig;
 };
 

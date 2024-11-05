@@ -19,7 +19,7 @@ public:
     BoxCollider& GetCollider() const;
 
 private:
-    std::shared_ptr<Transform> transform;
-    std::shared_ptr<Sprite> sprite;
-    std::unique_ptr<BoxCollider> collider;
+    std::shared_ptr<Transform> m_Transform;
+    std::shared_ptr<Sprite> m_Sprite;
+    std::unique_ptr<BoxCollider> m_Collider;
 };

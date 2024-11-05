@@ -3,7 +3,7 @@
 #include <memory>
 
 Transform::Transform()
-    : position(std::make_unique<Vector2>(0, 0)), scale(std::make_unique<Vector2>(32, 32))
+    : m_Position(std::make_unique<Vector2>(0, 0)), m_Scale(std::make_unique<Vector2>(32, 32))
 {
     
 }
@@ -11,43 +11,43 @@ Transform::Transform()
 
 void Transform::SetPosition(float x, float y)
 {
-    resultRect.x = static_cast<int>(x);
-    resultRect.y = static_cast<int>(y);
+    m_ResultRect.x = static_cast<int>(x);
+    m_ResultRect.y = static_cast<int>(y);
 
-    position->x = x;
-    position->y = y;
+    m_Position->m_X = x;
+    m_Position->m_Y = y;
 }
 
 void Transform::SetPosition(const Vector2& newPosition)
 {
-    SetPosition(newPosition.x, newPosition.y);
+    SetPosition(newPosition.m_X, newPosition.m_Y);
 }
 
 void Transform::AddPosition(const Vector2& addedPosition)
 {
-    SetPosition(position->x + addedPosition.x, position->y + addedPosition.y);
+    SetPosition(m_Position->m_X + addedPosition.m_X, m_Position->m_Y + addedPosition.m_Y);
 }
 
 void Transform::SetScale(float x, float y)
 {
-    resultRect.w = static_cast<int>(x);
-    resultRect.h = static_cast<int>(y);
+    m_ResultRect.w = static_cast<int>(x);
+    m_ResultRect.h = static_cast<int>(y);
 
-    scale->x = x;
-    scale->y = y;
+    m_Scale->m_X = x;
+    m_Scale->m_Y = y;
 }
 
 Vector2& Transform::GetPosition() const
 {
-    return *position;
+    return *m_Position;
 }
 
 Vector2& Transform::GetSize() const
 {
-    return *scale;
+    return *m_Scale;
 }
 
 SDL_Rect* Transform::GetResultTransform()
 {
-    return &resultRect;
+    return &m_ResultRect;
 }

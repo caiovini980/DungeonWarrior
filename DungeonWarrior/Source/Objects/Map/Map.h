@@ -15,14 +15,13 @@ public:
     std::vector<Tile>& GetMapTiles();
 
 private:
-    const char* GetTexturePathByID(int i) const;
+    const std::string& GetTexturePathByID(int i) const;
 
-    std::vector<Tile> tileMap;
+    std::vector<Tile> m_Tiles;
 
-    std::unique_ptr<TileConfig> tileConfig;
-    std::unique_ptr<MapsConfig> mapsConfig;
+    std::unique_ptr<TileConfig> m_TileConfig;
+    std::unique_ptr<MapsConfig> m_MapsConfig;
     
-    const char* floorTexturePath{ "Assets/Sprites/floor.png" };
-    const char* wallTexturePath{ "Assets/Sprites/wall.png" };
-    const char* defaultTexturePath{ wallTexturePath };
+    std::unique_ptr<std::string> m_FloorTexturePath{ std::make_unique<std::string>("Assets/Sprites/floor.png") };
+    std::unique_ptr<std::string> m_WallTexturePath{ std::make_unique<std::string>("Assets/Sprites/wall.png") };
 };

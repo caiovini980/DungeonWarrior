@@ -1,13 +1,13 @@
 ﻿#include "InputManager.h"
 
 InputManager::InputManager(std::shared_ptr<Player> player)
-    : player(player)
+    : m_Player(player)
 {
-    buttonD = std::make_unique<MoveRightCommand>();
-    buttonA = std::make_unique<MoveLeftCommand>();
+    m_ButtonD = std::make_unique<MoveRightCommand>();
+    m_ButtonA = std::make_unique<MoveLeftCommand>();
 
-    buttonW = std::make_unique<MoveUpCommand>();
-    buttonS = std::make_unique<MoveDownCommand>();
+    m_ButtonW = std::make_unique<MoveUpCommand>();
+    m_ButtonS = std::make_unique<MoveDownCommand>();
     
     std::cout << "InputManager Initialized.\n\n";
 }
@@ -19,22 +19,22 @@ void InputManager::HandleInput(const InputState& state) const
     // Move vertically
     if (keyboardState.GetKeyState(SDL_SCANCODE_S) == Held)
     {
-        buttonS->Execute(player);
+        m_ButtonS->Execute(m_Player);
     }
 
     if (keyboardState.GetKeyState(SDL_SCANCODE_W) == Held)
     {
-        buttonW->Execute(player);
+        m_ButtonW->Execute(m_Player);
     }
 
     // Move horizontally
     if (keyboardState.GetKeyState(SDL_SCANCODE_A) == Held)
     {
-        buttonA->Execute(player);
+        m_ButtonA->Execute(m_Player);
     }
 
     if (keyboardState.GetKeyState(SDL_SCANCODE_D) == Held)
     {
-        buttonD->Execute(player);
+        m_ButtonD->Execute(m_Player);
     }
 }

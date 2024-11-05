@@ -1,24 +1,27 @@
 ﻿#include "Player.h"
 
 Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
-    : config(configHandler.GetPlayerConfig())
+    : m_Config(configHandler.GetPlayerConfig())
 {
-    transform = std::make_unique<Transform>();
-    transform->SetPosition(100, 100);
+    (*m_AvailableTextures)[0] = "Assets/Sprites/player.png";
+    (*m_AvailableTextures)[1] = "Assets/Sprites/player_green.png";
     
-    sprite = std::make_unique<Sprite>(renderer);
-    sprite->SetTexture(availableTextures[config.textureIndex]);
+    m_Transform = std::make_unique<Transform>();
+    m_Transform->SetPosition(100, 100);
+    
+    m_Sprite = std::make_unique<Sprite>(renderer);
+    m_Sprite->SetTexture((*m_AvailableTextures)[m_Config.textureIndex].c_str());
 
     // TODO change the way we get this tag, maybe add it to some global file
     // TODO Create this on a separated class
-    collider = std::make_unique<BoxCollider>(*transform, tag);
+    m_Collider = std::make_unique<BoxCollider>(*m_Transform, m_Tag);
 }
 
 void Player::Render()
 {
-    if (sprite->GetTexture() != nullptr && sprite->GetRenderer() != nullptr)
+    if (m_Sprite->GetTexture() != nullptr && m_Sprite->GetRenderer() != nullptr)
     {
-        SDL_RenderCopy(sprite->GetRenderer(), sprite->GetTexture(), nullptr, transform->GetResultTransform());
+        SDL_RenderCopy(m_Sprite->GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
     }
 }
 
@@ -26,11 +29,11 @@ void Player::Update()
 {
     UpdatePosition();
     
-    movementDirection.x = 0.0f;
-    movementDirection.y = 0.0f;
+    m_MovementDirection.m_X = 0.0f;
+    m_MovementDirection.m_Y = 0.0f;
     
-    transform->SetScale(config.sizeX, config.sizeY);
-    collider->UpdateCollider();
+    m_Transform->SetScale(m_Config.sizeX, m_Config.sizeY);
+    m_Collider->UpdateCollider();
 }
 
 void Player::Destroy()
@@ -39,38 +42,38 @@ void Player::Destroy()
 
 void Player::UpdatePosition() const
 {
-    Vector2 normDir = movementDirection.Normalized();
-    normDir *= config.speed;
+    Vector2 normDir = m_MovementDirection.Normalized();
+    normDir *= m_Config.speed;
     
-    transform->AddPosition(normDir);
+    m_Transform->AddPosition(normDir);
 }
 
 void Player::MoveRight()
 {
-    movementDirection.x = 1;
+    m_MovementDirection.m_X = 1;
 }
 
 void Player::MoveLeft()
 {
-    movementDirection.x = -1;
+    m_MovementDirection.m_X = -1;
 }
 
 void Player::MoveUp()
 {
-    movementDirection.y = -1;
+    m_MovementDirection.m_Y = -1;
 }
 
 void Player::MoveDown()
 {
-    movementDirection.y = 1;
+    m_MovementDirection.m_Y = 1;
 }
 
 BoxCollider& Player::GetCollider() const
 {
-    if (collider == nullptr)
+    if (m_Collider == nullptr)
     {
         std::cerr << "ERROR: Class 'Player' don't have a collider.\n";
     }
     
-    return *collider;
+    return *m_Collider;
 }

@@ -6,7 +6,7 @@ KeyboardState::KeyboardState()
 
 bool KeyboardState::GetKeyValue(SDL_Scancode keyCode) const
 {
-    return currentState[keyCode] == 1;
+    return m_CurrentState[keyCode] == 1;
 }
 
 ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
@@ -17,9 +17,9 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
     // previous = 1 and current = 0 -> RELEASED
     // previous = 1 and current = 1 -> HOLD
     
-    if (previousState[keyCode] == 0)
+    if (m_PreviousState[keyCode] == 0)
     {
-        if (currentState[keyCode] == 0)
+        if (m_CurrentState[keyCode] == 0)
         {
             return None;
         }
@@ -27,7 +27,7 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
         return Pressed;
     }
 
-    if (currentState[keyCode] == 0)
+    if (m_CurrentState[keyCode] == 0)
     {
         return Released;
     }

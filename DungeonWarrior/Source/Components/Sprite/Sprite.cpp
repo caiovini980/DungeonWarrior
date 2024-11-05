@@ -5,30 +5,30 @@
 #include <iostream>
 
 Sprite::Sprite(SDL_Renderer& renderer)
-    : renderer(&renderer)
+    : m_Renderer(&renderer)
 {
     
 }
 
 Sprite::~Sprite()
 {
-    SDL_DestroyTexture(texture);
-    free(renderer);
+    SDL_DestroyTexture(m_Texture);
+    free(m_Renderer);
 }
 
 void Sprite::SetTexture(const char* imagePath)
 {
     SDL_Surface* tempSurface = IMG_Load(imagePath);
-    texture = SDL_CreateTextureFromSurface(this->renderer, tempSurface);
+    m_Texture = SDL_CreateTextureFromSurface(this->m_Renderer, tempSurface);
     SDL_FreeSurface(tempSurface);
 }
 
 SDL_Texture* Sprite::GetTexture() const
 {
-    return texture;
+    return m_Texture;
 }
 
 SDL_Renderer* Sprite::GetRenderer() const
 {
-    return renderer;
+    return m_Renderer;
 }

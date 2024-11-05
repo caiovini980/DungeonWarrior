@@ -24,5 +24,5 @@ public:
     const InputState& GetState() const;
 
 private:
-    InputState state;
+    InputState m_State;
 };

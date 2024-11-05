@@ -31,18 +31,17 @@ public:
     BoxCollider& GetCollider() const;
     
 private:
-    std::unique_ptr<Sprite> sprite;
-    std::unique_ptr<Transform> transform;
-    std::unique_ptr<BoxCollider> collider;
+    std::unique_ptr<Sprite> m_Sprite;
+    std::unique_ptr<Transform> m_Transform;
+    std::unique_ptr<BoxCollider> m_Collider;
 
-    std::string tag = "player";
+    std::string m_Tag = "player";
     
-    Vector2 movementDirection{0.0f, 0.0f};
+    Vector2 m_MovementDirection{0.0f, 0.0f};
 
-    PlayerConfig config;
+    PlayerConfig m_Config;
 
-    const char* availableTextures[2] {
-        "Assets/Sprites/player.png",
-        "Assets/Sprites/player_green.png"
+    std::unique_ptr<std::array<std::string, 2>> m_AvailableTextures {
+        std::make_unique<std::array<std::string, 2>>()
     };
 };
