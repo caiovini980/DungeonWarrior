@@ -1,10 +1,8 @@
 ﻿#include "BoxCollider.h"
 
-// TODO 
-BoxCollider::BoxCollider(Transform& entityTransform, std::string& tag)
-    : m_Transform(&entityTransform), m_Collider(), m_Tag(std::make_unique<std::string>(tag))
-{
-}
+BoxCollider::BoxCollider(const std::shared_ptr<Transform>& entityTransform, const std::shared_ptr<std::string>& tag)
+    : Collider(entityTransform, tag)
+{}
 
 void BoxCollider::UpdateCollider()
 {

@@ -11,7 +11,7 @@
 class InputManager
 {
 public:
-    InputManager(std::shared_ptr<Player> player);
+    InputManager(const std::shared_ptr<Player>& player);
 
     void HandleInput(const InputState& state) const;
 

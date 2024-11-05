@@ -16,13 +16,13 @@ Map::Map(SDL_Renderer& renderer, ConfigHandler& configHandler)
              if (texturePath == *m_WallTexturePath)
              {
                  // TODO change the way we get this tag, maybe add it to some global file
-                 std::string wallTag{"wall"};
+                 std::shared_ptr<std::string> wallTag{std::make_shared<std::string>("wall")};
                  m_Tiles.emplace_back(renderer, texturePath.c_str(), wallTag);
              }
              else
              {
                  // TODO change the way we get this tag, maybe add it to some global file
-                 std::string floorTag{"floor"};
+                 std::shared_ptr<std::string> floorTag{std::make_shared<std::string>("floor")};
                  m_Tiles.emplace_back(renderer, texturePath.c_str(), floorTag);
              }
              

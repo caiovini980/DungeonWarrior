@@ -3,10 +3,12 @@
 Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
     : m_Config(configHandler.GetPlayerConfig())
 {
+    // Add items to the skins array
+    m_AvailableTextures = std::make_unique<std::array<std::string, 2>>();
     (*m_AvailableTextures)[0] = "Assets/Sprites/player.png";
     (*m_AvailableTextures)[1] = "Assets/Sprites/player_green.png";
     
-    m_Transform = std::make_unique<Transform>();
+    m_Transform = std::make_shared<Transform>();
     m_Transform->SetPosition(100, 100);
     
     m_Sprite = std::make_unique<Sprite>(renderer);
@@ -14,7 +16,7 @@ Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
 
     // TODO change the way we get this tag, maybe add it to some global file
     // TODO Create this on a separated class
-    m_Collider = std::make_unique<BoxCollider>(*m_Transform, m_Tag);
+    m_Collider = std::make_unique<BoxCollider>(m_Transform, m_Tag);
 }
 
 void Player::Render()

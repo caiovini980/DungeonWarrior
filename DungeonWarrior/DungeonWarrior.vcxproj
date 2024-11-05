@@ -110,6 +110,7 @@
     <ClInclude Include="Source\Commands\MoveLeftCommand.h" />
     <ClInclude Include="Source\Commands\MoveRightCommand.h" />
     <ClInclude Include="Source\Commands\MoveUpCommand.h" />
+    <ClInclude Include="Source\Components\Collision\Collider.h" />
     <ClInclude Include="Source\Components\Collision\CollisionManager.h" />
     <ClInclude Include="Source\Components\Collision\LineSegment.h" />
     <ClInclude Include="Source\Components\Collision\BoxCollider.h" />

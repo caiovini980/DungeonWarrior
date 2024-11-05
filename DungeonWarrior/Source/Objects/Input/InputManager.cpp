@@ -1,6 +1,6 @@
 ﻿#include "InputManager.h"
 
-InputManager::InputManager(std::shared_ptr<Player> player)
+InputManager::InputManager(const std::shared_ptr<Player>& player)
     : m_Player(player)
 {
     m_ButtonD = std::make_unique<MoveRightCommand>();

@@ -8,10 +8,6 @@ ConfigHandler::ConfigHandler()
     LoadMapConfigs(0);
 }
 
-ConfigHandler::~ConfigHandler()
-{
-}
-
 JSON ConfigHandler::GetParsedJSON(const std::string& path)
 {
     std::ifstream file(path);

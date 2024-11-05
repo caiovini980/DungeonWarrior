@@ -7,7 +7,7 @@
 class Tile
 {
 public:
-    Tile(SDL_Renderer& renderer, const char* texturePath, std::string& tag);
+    Tile(SDL_Renderer& renderer, const char* texturePath, const std::shared_ptr<std::string>& tag);
     
     void Render() const;
     void Update();

@@ -44,9 +44,8 @@ class ConfigHandler
 {
 public:
     ConfigHandler();
-    ~ConfigHandler();
 
-    JSON GetParsedJSON(const std::string& path);
+    static JSON GetParsedJSON(const std::string& path);
     
     PlayerConfig& GetPlayerConfig();
     MapsConfig& GetMapsConfig();

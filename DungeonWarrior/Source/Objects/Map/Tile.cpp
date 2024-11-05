@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Tile::Tile(SDL_Renderer& renderer, const char* texturePath, std::string& tag)
+Tile::Tile(SDL_Renderer& renderer, const char* texturePath, const std::shared_ptr<std::string>& tag)
 {
     m_Transform = std::make_shared<Transform>();
     m_Sprite = std::make_shared<Sprite>(renderer);
@@ -10,7 +10,7 @@ Tile::Tile(SDL_Renderer& renderer, const char* texturePath, std::string& tag)
     m_Sprite->SetTexture(texturePath);
     
     // TODO change the way we get this tag, maybe add it to some global file
-    m_Collider = std::make_unique<BoxCollider>(*m_Transform, tag);
+    m_Collider = std::make_unique<BoxCollider>(m_Transform, tag);
 }
 
 void Tile::SetTilePosition(const Vector2& newPosition) const

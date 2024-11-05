@@ -1,23 +1,19 @@
 ﻿#pragma once
 #include <SDL_rect.h>
-#include <string>
 
+#include "Collider.h"
 #include "../Transform/Transform.h"
 
-class BoxCollider
+class BoxCollider : public Collider
 {
 public:
-    BoxCollider(Transform& entityTransform, std::string& tag);
+    BoxCollider(const std::shared_ptr<Transform>& entityTransform, const std::shared_ptr<std::string>& tag);
 
     void UpdateCollider();
-
+    
+    const std::string& GetTag() const override;
     const SDL_Rect& GetCollider() const;
-    const std::string& GetTag() const;
-    
+
 private:
-    
-    std::shared_ptr<Transform> m_Transform;
-    std::unique_ptr<std::string> m_Tag;
-    
     SDL_Rect m_Collider;
 };

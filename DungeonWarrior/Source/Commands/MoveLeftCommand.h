@@ -6,7 +6,7 @@
 class MoveLeftCommand : public Command
 {
 public:
-    void Execute(std::shared_ptr<Player> player) override
+    void Execute(const std::shared_ptr<Player> player) override
     {
         player->MoveLeft();
     }

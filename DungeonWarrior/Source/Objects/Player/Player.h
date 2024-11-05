@@ -32,16 +32,14 @@ public:
     
 private:
     std::unique_ptr<Sprite> m_Sprite;
-    std::unique_ptr<Transform> m_Transform;
+    std::shared_ptr<Transform> m_Transform;
     std::unique_ptr<BoxCollider> m_Collider;
 
-    std::string m_Tag = "player";
+    std::shared_ptr<std::string> m_Tag { std::make_shared<std::string>("player") };
     
     Vector2 m_MovementDirection{0.0f, 0.0f};
 
     PlayerConfig m_Config;
 
-    std::unique_ptr<std::array<std::string, 2>> m_AvailableTextures {
-        std::make_unique<std::array<std::string, 2>>()
-    };
+    std::unique_ptr<std::array<std::string, 2>> m_AvailableTextures;
 };
