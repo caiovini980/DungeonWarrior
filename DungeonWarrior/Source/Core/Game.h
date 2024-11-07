@@ -2,20 +2,22 @@
 
 #include <iostream>
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include "../Components/Collision/CollisionManager.h"
-#include "../Objects/Input/InputManager.h"
-#include "../Objects/Input/InputSystem.h"
-#include "../Objects/Map/Map.h"
-#include "../Objects/Player/Player.h"
-#include "../Utils/ConfigHandler.h"
+class MapManager;
+class InputSystem;
+class PlayerManager;
+class CollisionManager;
+class InputManager;
+class ConfigHandler;
+
+struct WindowConfig;
+struct SDL_Window;
+struct SDL_Renderer;
 
 class Game
 {
 public:
     Game(ConfigHandler& configHandler);
-    ~Game();
+    ~Game() = default;
 
     void Init(const char* title, int xPosition, int yPosition, int width, int height, bool fullscreen);
     void HandleEvents();
@@ -30,24 +32,24 @@ private:
     SDL_Renderer* m_Renderer;
 
     // Managers
-    std::unique_ptr<InputManager> m_InputManager;
-    std::unique_ptr<CollisionManager> m_CollisionManager;
+    std::shared_ptr<InputManager> m_InputManager;
+    std::shared_ptr<CollisionManager> m_CollisionManager;
+    std::shared_ptr<PlayerManager> m_PlayerManager;
+    std::shared_ptr<MapManager> m_MapManager;
     
     // Systems
-    std::unique_ptr<InputSystem> m_InputSystem;
+    std::shared_ptr<InputSystem> m_InputSystem;
 
     // Game objects
-    std::shared_ptr<Player> m_Player;
-    std::unique_ptr<Map> m_Map;
+    // std::unique_ptr<Map> m_Map;
+    // std::shared_ptr<Player> m_Player;
     
     ConfigHandler& m_ConfigHandler;
     WindowConfig& m_Config;
     
-    std::string wallTag{"wall"};
-    
     int m_Count{0};
     bool m_IsRunning{false};
 
-    void LoadGameObjects();
+    void LoadGameManagers();
     void LoadGameSystems();
 };

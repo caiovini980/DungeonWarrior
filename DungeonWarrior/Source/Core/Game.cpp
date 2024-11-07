@@ -1,4 +1,11 @@
 ﻿#include "Game.h"
+#include <SDL_image.h>
+
+#include "../Map/MapManager.h"
+#include "../Objects/Input/InputSystem.h"
+#include "../Components/Collision/CollisionManager.h"
+#include "../Objects/Input/InputManager.h"
+#include "../Player/PlayerManager.h"
 
 Game::Game(ConfigHandler& configHandler)
      : m_ConfigHandler(configHandler), m_Config(configHandler.GetWindowConfig())
@@ -6,27 +13,21 @@ Game::Game(ConfigHandler& configHandler)
     Init(m_Config.title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_Config.width, m_Config.height, false);
 }
 
-Game::~Game()
-{
-}
-
-void Game::LoadGameObjects()
-{
-    m_Player = std::make_shared<Player>(*m_Renderer, m_ConfigHandler);
-    m_Map = std::make_unique<Map>(*m_Renderer, m_ConfigHandler);
-
-    m_InputManager = std::make_unique<InputManager>(m_Player);
-    
-    std::cout << "GameObjects Initialized.\n\n";
-}
-
-
 void Game::LoadGameSystems()
 {
-    m_InputSystem = std::make_unique<InputSystem>();
-    m_CollisionManager = std::make_unique<CollisionManager>();
+    m_InputSystem = std::make_shared<InputSystem>();
     
     std::cout << "Systems Initialized.\n\n";
+}
+
+void Game::LoadGameManagers()
+{
+    m_CollisionManager = std::make_shared<CollisionManager>();
+    m_PlayerManager = std::make_shared<PlayerManager>(*m_Renderer, *m_CollisionManager, m_ConfigHandler);
+    m_InputManager = std::make_shared<InputManager>(m_PlayerManager->GetPlayer());
+    m_MapManager = std::make_shared<MapManager>(m_Renderer, *m_CollisionManager, m_ConfigHandler);
+    
+    std::cout << "Managers Initialized.\n\n";
 }
 
 void Game::Init(const char* title, int xPosition, int yPosition, int width, int height, bool fullscreen)
@@ -69,7 +70,7 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
 
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
     {
-        std::cerr << "Failed to initialize SDL_image: " << IMG_GetError() << std::endl;
+        std::cerr << "Failed to initialize SDL_image: " << IMG_GetError() << "\n";
         return;
     }
     std::cout << "SDL_image ... OK\n";
@@ -77,7 +78,7 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
     m_IsRunning = true;
 
     LoadGameSystems();
-    LoadGameObjects();
+    LoadGameManagers();
 }
 
 void Game::HandleEvents()
@@ -106,21 +107,20 @@ void Game::Update()
 
     // process input
     m_InputManager->HandleInput(state);
-    m_Player->Update();
+    m_PlayerManager->Update();
 
     // check collisions
     // player & walls
-    for (auto& tile : m_Map->GetMapTiles())
-    {
-        // TODO change the way we get this tag, maybe add it to some global file
-        if (tile.GetCollider().GetTag() == wallTag)
-        {
-            if(m_CollisionManager->CheckCollision(m_Player->GetCollider(), tile.GetCollider()))
-            {
-                std::cout << "Colliding with Wall!\n";
-            }
-        }
-    }
+    // for (auto& tile : m_Map->GetMapTiles())
+    // {
+    //     if (tile.GetCollider().GetCollisionType() == CollisionTypes::WALL)
+    //     {
+    //         if(m_CollisionManager->CheckCollision(m_Player->GetCollider(), tile.GetCollider()))
+    //         {
+    //             std::cout << "COLLIDING!\n";
+    //         }
+    //     }
+    // }
 }
 
 void Game::Render() const
@@ -128,15 +128,15 @@ void Game::Render() const
     SDL_RenderClear(m_Renderer);
 
     // add stuff to render on the screen
-    m_Map->DrawMap();
-    m_Player->Render();
+    m_MapManager->Render();
+    m_PlayerManager->Render();
     
     SDL_RenderPresent(m_Renderer);
 }
 
 void Game::Clean() const
 {
-    m_Player->Destroy();
+    m_PlayerManager->Destroy();
     
     SDL_DestroyWindow(m_Window);
     SDL_DestroyRenderer(m_Renderer);

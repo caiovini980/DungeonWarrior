@@ -1,6 +1,8 @@
 ﻿#pragma once
+#include <iostream>
+#include <memory>
 
-#include "../Player/Player.h"
+#include "InputSystem.h"
 #include "../../Interfaces/Command.h"
 
 #include "../../Commands/MoveLeftCommand.h"
@@ -8,12 +10,15 @@
 #include "../../Commands/MoveUpCommand.h"
 #include "../../Commands/MoveDownCommand.h"
 
+
+class GameObject;
+
 class InputManager
 {
 public:
     InputManager(const std::shared_ptr<Player>& player);
 
-    void HandleInput(const InputState& state) const;
+    void HandleInput(const InputState& state);
 
 private:
     std::shared_ptr<Player> m_Player;

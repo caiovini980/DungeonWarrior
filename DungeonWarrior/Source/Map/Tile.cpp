@@ -1,16 +1,17 @@
 ﻿#include "Tile.h"
-
 #include <iostream>
 
-Tile::Tile(SDL_Renderer& renderer, const char* texturePath, const std::shared_ptr<std::string>& tag)
+#include "../Components/Transform/Transform.h"
+#include "../Components/Sprite/Sprite.h"
+
+Tile::Tile(SDL_Renderer& renderer, const char* texturePath, CollisionManager& collisionManager, CollisionTypes collisionType)
 {
     m_Transform = std::make_shared<Transform>();
     m_Sprite = std::make_shared<Sprite>(renderer);
 
     m_Sprite->SetTexture(texturePath);
     
-    // TODO change the way we get this tag, maybe add it to some global file
-    m_Collider = std::make_unique<BoxCollider>(m_Transform, tag);
+    // m_Collider = collisionManager.CreateCollider<BoxCollider>(*m_Transform, collisionType);
 }
 
 void Tile::SetTilePosition(const Vector2& newPosition) const
@@ -31,19 +32,11 @@ BoxCollider& Tile::GetCollider() const
     return *m_Collider;
 }
 
-void Tile::Render() const
+void Tile::Render()
 {
     if (m_Sprite->GetTexture() != nullptr && m_Sprite->GetRenderer() != nullptr)
     {
         SDL_RenderCopy(m_Sprite->GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
     }
-}
-
-void Tile::Update()
-{
-}
-
-void Tile::Destroy()
-{
 }
 

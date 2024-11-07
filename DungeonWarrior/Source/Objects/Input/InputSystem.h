@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <memory>
-#include <SDL_events.h>
 
 #include "KeyboardState.h"
 
@@ -13,7 +11,7 @@ class InputSystem
 {
 public:
     InputSystem();
-    ~InputSystem();
+    ~InputSystem() = default;
     
     void Initialize();
     void Shutdown();

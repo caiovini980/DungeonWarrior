@@ -12,7 +12,7 @@ InputManager::InputManager(const std::shared_ptr<Player>& player)
     std::cout << "InputManager Initialized.\n\n";
 }
 
-void InputManager::HandleInput(const InputState& state) const
+void InputManager::HandleInput(const InputState& state)
 {
     KeyboardState keyboardState = state.keyboardState;
 

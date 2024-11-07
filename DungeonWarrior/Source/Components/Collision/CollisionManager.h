@@ -10,5 +10,5 @@ public:
     static bool CheckCollision(const BoxCollider& colliderA, const BoxCollider& colliderB);
 
     template<typename T, typename = std::enable_if_t<std::is_base_of_v<Collider, T>>>
-    std::unique_ptr<T> CreateCollider(Transform& entityTransform, std::string& tag);
+    std::unique_ptr<T> CreateCollider(Transform& entityTransform, CollisionTypes collisionType);
 };

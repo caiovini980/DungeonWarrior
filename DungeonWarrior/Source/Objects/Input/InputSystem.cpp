@@ -1,12 +1,10 @@
 ﻿#include "InputSystem.h"
 
+#include <SDL_keyboard.h>
+
 InputSystem::InputSystem()
 {
     Initialize();
-}
-
-InputSystem::~InputSystem()
-{
 }
 
 void InputSystem::Initialize()

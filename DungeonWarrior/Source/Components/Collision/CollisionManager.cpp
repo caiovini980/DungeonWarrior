@@ -14,7 +14,7 @@ bool CollisionManager::CheckCollision(const BoxCollider& colliderA, const BoxCol
 }
 
 template<typename T, typename = std::enable_if_t<std::is_base_of_v<Collider, T>>>
-std::unique_ptr<T> CollisionManager::CreateCollider(Transform& entityTransform, std::string& tag)
+std::unique_ptr<T> CollisionManager::CreateCollider(Transform& entityTransform, CollisionTypes collisionType)
 {
-    return std::make_unique<T>(entityTransform, tag);
+    return std::make_unique<T>(entityTransform, collisionType);
 }

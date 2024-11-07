@@ -1,22 +1,23 @@
 ﻿#pragma once
 #include <memory>
-#include <SDL_render.h>
-#include <SDL_image.h>
-#include <unordered_map>
+#include <string>
 
-#include "../../Interfaces/GameObject.h"
+#include "../Utils/Vector2.h"
+#include "../Utils/ConfigHandler.h"
 
-#include "../../Utils/ConfigHandler.h"
+#include "../Interfaces/GameObject.h"
 
-#include "../../Components/Sprite/Sprite.h"
-#include "../../Components/Transform/Transform.h"
-#include "../../Components/Collision/BoxCollider.h"
-#include "../Input/InputSystem.h"
+// Forward declarations
+class Sprite;
+class Transform;
+class BoxCollider;
+class CollisionManager;
+struct SDL_Renderer;
 
-class Player : GameObject
+class Player : public GameObject
 {
 public:
-    Player(SDL_Renderer& renderer, ConfigHandler& configHandler);
+    Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
     void Render() override;
     void Update() override;
     void Destroy() override;
@@ -34,8 +35,6 @@ private:
     std::unique_ptr<Sprite> m_Sprite;
     std::shared_ptr<Transform> m_Transform;
     std::unique_ptr<BoxCollider> m_Collider;
-
-    std::shared_ptr<std::string> m_Tag { std::make_shared<std::string>("player") };
     
     Vector2 m_MovementDirection{0.0f, 0.0f};
 

@@ -1,6 +1,9 @@
 ﻿#include "Player.h"
+#include "../Components/Transform/Transform.h"
+#include "../Components/Sprite/Sprite.h"
+#include "../Components/Collision/BoxCollider.h"
 
-Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
+Player::Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
     : m_Config(configHandler.GetPlayerConfig())
 {
     // Add items to the skins array
@@ -14,9 +17,7 @@ Player::Player(SDL_Renderer& renderer, ConfigHandler& configHandler)
     m_Sprite = std::make_unique<Sprite>(renderer);
     m_Sprite->SetTexture((*m_AvailableTextures)[m_Config.textureIndex].c_str());
 
-    // TODO change the way we get this tag, maybe add it to some global file
-    // TODO Create this on a separated class
-    m_Collider = std::make_unique<BoxCollider>(m_Transform, m_Tag);
+    // m_Collider = collisionManager.CreateCollider<BoxCollider>(*m_Transform, CollisionTypes::PLAYER);
 }
 
 void Player::Render()
@@ -35,7 +36,7 @@ void Player::Update()
     m_MovementDirection.m_Y = 0.0f;
     
     m_Transform->SetScale(m_Config.sizeX, m_Config.sizeY);
-    m_Collider->UpdateCollider();
+    // m_Collider->UpdateCollider();
 }
 
 void Player::Destroy()

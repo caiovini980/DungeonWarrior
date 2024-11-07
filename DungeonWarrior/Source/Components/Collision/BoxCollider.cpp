@@ -1,7 +1,7 @@
 ﻿#include "BoxCollider.h"
 
-BoxCollider::BoxCollider(const std::shared_ptr<Transform>& entityTransform, const std::shared_ptr<std::string>& tag)
-    : Collider(entityTransform, tag)
+BoxCollider::BoxCollider(const std::shared_ptr<Transform>& entityTransform, CollisionTypes collisionType)
+    : Collider(entityTransform, collisionType)
 {}
 
 void BoxCollider::UpdateCollider()
@@ -20,7 +20,7 @@ const SDL_Rect& BoxCollider::GetCollider() const
     return m_Collider;
 }
 
-const std::string& BoxCollider::GetTag() const
+const CollisionTypes& BoxCollider::GetCollisionType() const
 {
-    return *m_Tag;
+    return m_CollisionType;
 }
