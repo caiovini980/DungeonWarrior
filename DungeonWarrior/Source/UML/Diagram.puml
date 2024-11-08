@@ -51,6 +51,8 @@ package DungeonWarrior
         }
     }
     
+    package Assets
+    
     package Core 
     {
         package Sprite

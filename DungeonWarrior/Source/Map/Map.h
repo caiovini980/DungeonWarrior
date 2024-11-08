@@ -12,7 +12,7 @@ struct SDL_Renderer;
 class Map
 {
 public:
-    Map(SDL_Renderer* renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
+    Map(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
     ~Map() = default;
     
     void DrawMap() const;

@@ -24,8 +24,9 @@ void Game::LoadGameManagers()
 {
     m_CollisionManager = std::make_shared<CollisionManager>();
     m_PlayerManager = std::make_shared<PlayerManager>(*m_Renderer, *m_CollisionManager, m_ConfigHandler);
+    m_MapManager = std::make_shared<MapManager>(*m_Renderer, *m_CollisionManager, m_ConfigHandler);
+    
     m_InputManager = std::make_shared<InputManager>(m_PlayerManager->GetPlayer());
-    m_MapManager = std::make_shared<MapManager>(m_Renderer, *m_CollisionManager, m_ConfigHandler);
     
     std::cout << "Managers Initialized.\n\n";
 }

@@ -5,7 +5,7 @@
 #include "../Utils/ConfigHandler.h"
 #include "Tile.h"
 
-Map::Map(SDL_Renderer* renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
+Map::Map(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
     : m_TileConfig(&configHandler.GetTileConfig()), m_MapsConfig(&configHandler.GetMapsConfig())
 {
     for (int row = 0; row < m_MapsConfig->rows; row++)
@@ -19,11 +19,11 @@ Map::Map(SDL_Renderer* renderer, CollisionManager& collisionManager, ConfigHandl
              // TODO resolve this issue
              if (texturePath == m_WallTexturePath)
              {
-                 m_Tiles.emplace_back(std::make_shared<Tile>(*renderer, texturePath.c_str(), collisionManager, CollisionTypes::WALL));
+                 m_Tiles.emplace_back(std::make_shared<Tile>(renderer, texturePath.c_str(), collisionManager, CollisionTypes::WALL));
              }
              else
              {
-                 m_Tiles.emplace_back(std::make_shared<Tile>(*renderer, texturePath.c_str(), collisionManager, CollisionTypes::FLOOR));
+                 m_Tiles.emplace_back(std::make_shared<Tile>(renderer, texturePath.c_str(), collisionManager, CollisionTypes::FLOOR));
              }
              
              m_Tiles.back()->SetTileSize(tileSize);

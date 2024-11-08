@@ -3,7 +3,7 @@
 
 #include "Map.h"
 
-MapManager::MapManager(SDL_Renderer* renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
+MapManager::MapManager(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
     : m_Map(std::make_shared<Map>(renderer, collisionManager, configHandler))
 {
 }

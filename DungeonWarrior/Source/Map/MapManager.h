@@ -11,7 +11,7 @@ struct SDL_Renderer;
 class MapManager
 {
 public:
-    MapManager(SDL_Renderer* renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
+    MapManager(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
     ~MapManager() = default;
     
     void Render() const;
