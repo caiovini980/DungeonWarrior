@@ -3,11 +3,12 @@
 
 #include "../Components/Transform/Transform.h"
 #include "../Components/Sprite/Sprite.h"
+#include "../Core/GameManager.h"
 
 Tile::Tile(SDL_Renderer& renderer, const char* texturePath, CollisionManager& collisionManager, CollisionTypes collisionType)
 {
     m_Transform = std::make_shared<Transform>();
-    m_Sprite = std::make_shared<Sprite>(renderer);
+    m_Sprite = std::make_shared<Sprite>();
 
     m_Sprite->SetTexture(texturePath);
     
@@ -34,9 +35,9 @@ BoxCollider& Tile::GetCollider() const
 
 void Tile::Render()
 {
-    if (m_Sprite->GetTexture() != nullptr && m_Sprite->GetRenderer() != nullptr)
+    if (m_Sprite->GetTexture() != nullptr && GameManager::GetInstance().GetRenderer() != nullptr)
     {
-        SDL_RenderCopy(m_Sprite->GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
+        SDL_RenderCopy(GameManager::GetInstance().GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
     }
 }
 

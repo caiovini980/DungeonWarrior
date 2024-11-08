@@ -1,18 +1,20 @@
 ﻿#pragma once
 #include <SDL_render.h>
 
-class Sprite
+#include "../Component.h"
+
+class Sprite : public Component
 {
 public:
-    Sprite(SDL_Renderer& renderer);
-    ~Sprite();
+    Sprite();
+    ~Sprite() override = default;
 
     void SetTexture(const char* imagePath);
+
+    void Update() override;
     
     SDL_Texture* GetTexture() const;
-    SDL_Renderer* GetRenderer() const;
 
 private:
-    SDL_Renderer* m_Renderer;
     SDL_Texture* m_Texture;
 };

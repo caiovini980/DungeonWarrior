@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+class Player;
 class MapManager;
 class InputSystem;
 class PlayerManager;
@@ -29,12 +30,12 @@ public:
 
 private:
     SDL_Window* m_Window;
-    SDL_Renderer* m_Renderer;
 
     // Managers
     std::shared_ptr<InputManager> m_InputManager;
     std::shared_ptr<CollisionManager> m_CollisionManager;
     std::shared_ptr<PlayerManager> m_PlayerManager;
+    Player* m_Player;
     std::shared_ptr<MapManager> m_MapManager;
     
     // Systems
@@ -42,7 +43,6 @@ private:
 
     // Game objects
     // std::unique_ptr<Map> m_Map;
-    // std::shared_ptr<Player> m_Player;
     
     ConfigHandler& m_ConfigHandler;
     WindowConfig& m_Config;

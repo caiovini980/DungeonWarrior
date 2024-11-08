@@ -1,11 +1,13 @@
 ﻿#include "Game.h"
 #include <SDL_image.h>
 
+#include "GameManager.h"
 #include "../Map/MapManager.h"
 #include "../Objects/Input/InputSystem.h"
 #include "../Components/Collision/CollisionManager.h"
 #include "../Objects/Input/InputManager.h"
 #include "../Player/PlayerManager.h"
+#include "../Player/Player.h"
 
 Game::Game(ConfigHandler& configHandler)
      : m_ConfigHandler(configHandler), m_Config(configHandler.GetWindowConfig())
@@ -22,11 +24,13 @@ void Game::LoadGameSystems()
 
 void Game::LoadGameManagers()
 {
-    m_CollisionManager = std::make_shared<CollisionManager>();
-    m_PlayerManager = std::make_shared<PlayerManager>(*m_Renderer, *m_CollisionManager, m_ConfigHandler);
-    m_MapManager = std::make_shared<MapManager>(*m_Renderer, *m_CollisionManager, m_ConfigHandler);
+    auto gameManager = GameManager::GetInstance();
     
-    m_InputManager = std::make_shared<InputManager>(m_PlayerManager->GetPlayer());
+    m_CollisionManager = std::make_shared<CollisionManager>();
+    m_Player = &gameManager.SpawnGameObject<Player>();
+    
+    m_MapManager = std::make_shared<MapManager>(*gameManager.GetRenderer(), *m_CollisionManager, m_ConfigHandler);
+    // m_InputManager = std::make_shared<InputManager>(m_PlayerManager->GetPlayer());
     
     std::cout << "Managers Initialized.\n\n";
 }
@@ -57,16 +61,19 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
     }
     
     std::cout << "Window ... OK\n";
-
-    m_Renderer = SDL_CreateRenderer(m_Window, -1, flags);
-    if (!m_Renderer)
+    
+    // Initialize GameManager
+    GameManager& gameManager = GameManager::GetInstance();
+    gameManager.SetRenderer(SDL_CreateRenderer(m_Window, -1, flags));
+    
+    if (!gameManager.GetRenderer())
     {
         std::cerr << "Error while creating a renderer: " << SDL_GetError() << "\n";
         m_IsRunning = false;
         return;
     }
-
-    SDL_SetRenderDrawColor(m_Renderer, 255, 255, 255, 255);
+    
+    SDL_SetRenderDrawColor(gameManager.GetRenderer(), 255, 255, 255, 255);
     std::cout << "Renderer ... OK\n";
 
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
@@ -126,13 +133,13 @@ void Game::Update()
 
 void Game::Render() const
 {
-    SDL_RenderClear(m_Renderer);
+    SDL_RenderClear(GameManager::GetInstance().GetRenderer());
 
     // add stuff to render on the screen
     m_MapManager->Render();
     m_PlayerManager->Render();
     
-    SDL_RenderPresent(m_Renderer);
+    SDL_RenderPresent(GameManager::GetInstance().GetRenderer());
 }
 
 void Game::Clean() const
@@ -140,7 +147,7 @@ void Game::Clean() const
     m_PlayerManager->Destroy();
     
     SDL_DestroyWindow(m_Window);
-    SDL_DestroyRenderer(m_Renderer);
+    SDL_DestroyRenderer(GameManager::GetInstance().GetRenderer());
     SDL_Quit();
     
     std::cout << "Execution cleaned.\n";

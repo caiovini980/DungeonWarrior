@@ -4,31 +4,30 @@
 
 #include <iostream>
 
-Sprite::Sprite(SDL_Renderer& renderer)
-    : m_Renderer(&renderer)
+#include "../../Core/GameManager.h"
+#include "../Transform/Transform.h"
+#include "../../Core/GameObject.h"
+
+Sprite::Sprite()
 {
     
 }
 
-Sprite::~Sprite()
-{
-    SDL_DestroyTexture(m_Texture);
-    free(m_Renderer);
-}
-
 void Sprite::SetTexture(const char* imagePath)
 {
+    SDL_Renderer* renderer = GameManager::GetInstance().GetRenderer();
     SDL_Surface* tempSurface = IMG_Load(imagePath);
-    m_Texture = SDL_CreateTextureFromSurface(this->m_Renderer, tempSurface);
+    
+    m_Texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
     SDL_FreeSurface(tempSurface);
+}
+
+void Sprite::Update()
+{
+    SDL_RenderCopy(GameManager::GetInstance().GetRenderer(), GetTexture(), nullptr, GetOwner()->GetTransform()->GetResultTransform());
 }
 
 SDL_Texture* Sprite::GetTexture() const
 {
     return m_Texture;
-}
-
-SDL_Renderer* Sprite::GetRenderer() const
-{
-    return m_Renderer;
 }

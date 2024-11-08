@@ -11,22 +11,26 @@ Player::Player(SDL_Renderer& renderer, CollisionManager& collisionManager, Confi
     (*m_AvailableTextures)[0] = "Assets/Sprites/player.png";
     (*m_AvailableTextures)[1] = "Assets/Sprites/player_green.png";
     
-    m_Transform = std::make_shared<Transform>();
-    m_Transform->SetPosition(100, 100);
+    GetTransform()->SetPosition(100, 100);
+
+
+    // m_Sprite = AddComponent<Sprite>();
+    // m_Sprite->SetTexture((*m_AvailableTextures)[m_Config.textureIndex].c_str());
+
     
-    m_Sprite = std::make_unique<Sprite>(renderer);
-    m_Sprite->SetTexture((*m_AvailableTextures)[m_Config.textureIndex].c_str());
+    // m_Sprite = std::make_unique<Sprite>(renderer);
+    // m_Sprite->SetTexture((*m_AvailableTextures)[m_Config.textureIndex].c_str());
 
     // m_Collider = collisionManager.CreateCollider<BoxCollider>(*m_Transform, CollisionTypes::PLAYER);
 }
 
-void Player::Render()
-{
-    if (m_Sprite->GetTexture() != nullptr && m_Sprite->GetRenderer() != nullptr)
-    {
-        SDL_RenderCopy(m_Sprite->GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
-    }
-}
+// void Player::Render()
+// {
+    // if (m_Sprite->GetTexture() != nullptr && m_Sprite->GetRenderer() != nullptr)
+    // {
+    //     SDL_RenderCopy(m_Sprite->GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
+    // }
+// }
 
 void Player::Update()
 {
@@ -35,20 +39,21 @@ void Player::Update()
     m_MovementDirection.m_X = 0.0f;
     m_MovementDirection.m_Y = 0.0f;
     
-    m_Transform->SetScale(m_Config.sizeX, m_Config.sizeY);
+    GetTransform()->SetScale(m_Config.sizeX, m_Config.sizeY);
     // m_Collider->UpdateCollider();
 }
 
-void Player::Destroy()
-{
-}
+
+// void Player::Destroy()
+// {
+// }
 
 void Player::UpdatePosition() const
 {
     Vector2 normDir = m_MovementDirection.Normalized();
     normDir *= m_Config.speed;
     
-    m_Transform->AddPosition(normDir);
+    GetTransform()->AddPosition(normDir);
 }
 
 void Player::MoveRight()

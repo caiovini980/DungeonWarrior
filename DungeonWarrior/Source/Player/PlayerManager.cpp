@@ -9,17 +9,17 @@ PlayerManager::PlayerManager(SDL_Renderer& renderer, CollisionManager& collision
 
 void PlayerManager::Update() const
 {
-    m_Player->Update();
+    // m_Player->Update();
 }
 
 void PlayerManager::Render() const
 {
-    m_Player->Render();
+    // m_Player->Render();
 }
 
 void PlayerManager::Destroy() const
 {
-    m_Player->Destroy();
+    // m_Player->Destroy();
 }
 
 std::shared_ptr<Player>& PlayerManager::GetPlayer()

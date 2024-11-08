@@ -5,7 +5,7 @@
 #include "../Utils/Vector2.h"
 #include "../Utils/ConfigHandler.h"
 
-#include "../Interfaces/GameObject.h"
+#include "../Core/GameObject.h"
 
 // Forward declarations
 class Sprite;
@@ -17,10 +17,11 @@ struct SDL_Renderer;
 class Player : public GameObject
 {
 public:
+    Player() = default;
+    ~Player() override = default;
     Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
-    void Render() override;
+    
     void Update() override;
-    void Destroy() override;
 
     void UpdatePosition() const;
 
@@ -32,8 +33,6 @@ public:
     BoxCollider& GetCollider() const;
     
 private:
-    std::unique_ptr<Sprite> m_Sprite;
-    std::shared_ptr<Transform> m_Transform;
     std::unique_ptr<BoxCollider> m_Collider;
     
     Vector2 m_MovementDirection{0.0f, 0.0f};
