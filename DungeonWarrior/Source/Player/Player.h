@@ -17,9 +17,11 @@ struct SDL_Renderer;
 class Player : public GameObject
 {
 public:
-    Player() = default;
+    Player();
     ~Player() override = default;
-    Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
+    // Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
+    
+    void SetupPlayer(const PlayerConfig& config);
     
     void Update() override;
 
@@ -39,5 +41,11 @@ private:
 
     PlayerConfig m_Config;
 
-    std::unique_ptr<std::array<std::string, 2>> m_AvailableTextures;
+    // refactor this, not so important
+    std::array<std::string, 2> m_TexturesPaths {
+        "Assets/Sprites/player.png",
+        "Assets/Sprites/player_green.png"
+    };
+    
+    Sprite* m_Sprite;
 };

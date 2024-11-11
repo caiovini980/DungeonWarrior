@@ -2,6 +2,8 @@
 #include <memory>
 #include <vector>
 
+#include "../Components/Component.h"
+
 class Transform;
 class Component;
 
@@ -19,7 +21,15 @@ protected:
     virtual void Update() = 0;
     
     template<typename T>
-    T* AddComponent();
+    T& AddComponent()
+    {
+        static_assert(std::is_base_of_v<Component, T>, "The class must be a Component to be added to a GameObject");
+
+        m_Components.push_back(std::make_shared<T>());
+        m_Components.back().get()->Setup(this);
+        
+        return *static_cast<T*>(m_Components.back().get());
+    }
     
 private:
     

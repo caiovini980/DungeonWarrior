@@ -3,25 +3,29 @@
 #include "../Components/Sprite/Sprite.h"
 #include "../Components/Collision/BoxCollider.h"
 
-Player::Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
-    : m_Config(configHandler.GetPlayerConfig())
+Player::Player()
 {
-    // Add items to the skins array
-    m_AvailableTextures = std::make_unique<std::array<std::string, 2>>();
-    (*m_AvailableTextures)[0] = "Assets/Sprites/player.png";
-    (*m_AvailableTextures)[1] = "Assets/Sprites/player_green.png";
-    
     GetTransform()->SetPosition(100, 100);
+    m_Sprite = &AddComponent<Sprite>();
+}
 
+// Player::Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
+//     : m_Config(configHandler.GetPlayerConfig())
+// {
+//     // Add items to the skins array
+//     
+//     GetTransform()->SetPosition(100, 100);
+//     
+//     m_Sprite = &AddComponent<Sprite>();
+//     m_Sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
+//
+//     // m_Collider = collisionManager.CreateCollider<BoxCollider>(*m_Transform, CollisionTypes::PLAYER);
+// }
 
-    // m_Sprite = AddComponent<Sprite>();
-    // m_Sprite->SetTexture((*m_AvailableTextures)[m_Config.textureIndex].c_str());
-
-    
-    // m_Sprite = std::make_unique<Sprite>(renderer);
-    // m_Sprite->SetTexture((*m_AvailableTextures)[m_Config.textureIndex].c_str());
-
-    // m_Collider = collisionManager.CreateCollider<BoxCollider>(*m_Transform, CollisionTypes::PLAYER);
+void Player::SetupPlayer(const PlayerConfig& config)
+{
+    m_Config = config;
+    m_Sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
 }
 
 // void Player::Render()

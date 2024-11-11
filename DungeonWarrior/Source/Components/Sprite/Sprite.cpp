@@ -24,6 +24,11 @@ void Sprite::SetTexture(const char* imagePath)
 
 void Sprite::Update()
 {
+    
+}
+
+void Sprite::Render()
+{
     SDL_RenderCopy(GameManager::GetInstance().GetRenderer(), GetTexture(), nullptr, GetOwner()->GetTransform()->GetResultTransform());
 }
 

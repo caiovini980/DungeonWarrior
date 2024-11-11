@@ -8,6 +8,8 @@ public:
     Component() = default;
     virtual void Update() = 0;
     virtual ~Component() = default;
+
+    virtual void Render(){}
     
 protected:
     GameObject* GetOwner() const { return m_Owner; }

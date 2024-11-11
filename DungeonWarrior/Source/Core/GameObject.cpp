@@ -13,6 +13,10 @@ GameObject::GameObject()
 
 void GameObject::Render()
 {
+    for (auto& component : m_Components)
+    {
+        component->Render();
+    }
 }
 
 void GameObject::UpdateComponents() const
@@ -21,16 +25,4 @@ void GameObject::UpdateComponents() const
     {
         element->Update();
     }
-}
-
-template <typename T>
-T* GameObject::AddComponent()
-{
-    static_assert(std::is_base_of_v<Component, T>, "The class must be a Component to be added to a GameObject");
-
-    std::shared_ptr<T> newComponent = std::make_shared<T>();
-    static_cast<Component*>(newComponent.get())->Setup(this);
-    m_Components.emplace_back(newComponent);
-    
-    return newComponent;
 }

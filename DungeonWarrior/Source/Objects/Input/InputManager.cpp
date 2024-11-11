@@ -16,6 +16,8 @@ void InputManager::HandleInput(const InputState& state)
 {
     KeyboardState keyboardState = state.keyboardState;
 
+    return;
+    
     // Move vertically
     if (keyboardState.GetKeyState(SDL_SCANCODE_S) == Held)
     {

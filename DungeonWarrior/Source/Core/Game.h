@@ -34,7 +34,6 @@ private:
     // Managers
     std::shared_ptr<InputManager> m_InputManager;
     std::shared_ptr<CollisionManager> m_CollisionManager;
-    std::shared_ptr<PlayerManager> m_PlayerManager;
     Player* m_Player;
     std::shared_ptr<MapManager> m_MapManager;
     

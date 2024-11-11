@@ -3,11 +3,16 @@
 
 #include "../Core/GameObject.h"
 
+GameManager* GameManager::m_Instance;
+
 GameManager& GameManager::GetInstance()
 {
-    static GameManager instance;
-        
-    return instance;
+    if (!m_Instance)
+    {
+        m_Instance = new GameManager();
+    }
+    
+    return *m_Instance;
 }
 
 void GameManager::Update() const

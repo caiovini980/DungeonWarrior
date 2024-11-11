@@ -6,7 +6,6 @@
 #include "../Objects/Input/InputSystem.h"
 #include "../Components/Collision/CollisionManager.h"
 #include "../Objects/Input/InputManager.h"
-#include "../Player/PlayerManager.h"
 #include "../Player/Player.h"
 
 Game::Game(ConfigHandler& configHandler)
@@ -27,9 +26,10 @@ void Game::LoadGameManagers()
     auto gameManager = GameManager::GetInstance();
     
     m_CollisionManager = std::make_shared<CollisionManager>();
-    m_Player = &gameManager.SpawnGameObject<Player>();
+
+    // Create Player
     
-    m_MapManager = std::make_shared<MapManager>(*gameManager.GetRenderer(), *m_CollisionManager, m_ConfigHandler);
+    // m_MapManager = std::make_shared<MapManager>(*gameManager.GetRenderer(), *m_CollisionManager, m_ConfigHandler);
     // m_InputManager = std::make_shared<InputManager>(m_PlayerManager->GetPlayer());
     
     std::cout << "Managers Initialized.\n\n";
@@ -87,6 +87,9 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
 
     LoadGameSystems();
     LoadGameManagers();
+    
+    m_Player = &gameManager.SpawnGameObject<Player>();
+    m_Player->SetupPlayer(m_ConfigHandler.GetPlayerConfig());
 }
 
 void Game::HandleEvents()
@@ -115,7 +118,11 @@ void Game::Update()
 
     // process input
     m_InputManager->HandleInput(state);
-    m_PlayerManager->Update();
+    GameManager::GetInstance().Update();
+
+
+    
+    // m_PlayerManager->Update();
 
     // check collisions
     // player & walls
@@ -136,16 +143,16 @@ void Game::Render() const
     SDL_RenderClear(GameManager::GetInstance().GetRenderer());
 
     // add stuff to render on the screen
-    m_MapManager->Render();
-    m_PlayerManager->Render();
+    // m_MapManager->Render();
+    // m_PlayerManager->Render();
+
+    GameManager::GetInstance().Render();
     
     SDL_RenderPresent(GameManager::GetInstance().GetRenderer());
 }
 
 void Game::Clean() const
 {
-    m_PlayerManager->Destroy();
-    
     SDL_DestroyWindow(m_Window);
     SDL_DestroyRenderer(GameManager::GetInstance().GetRenderer());
     SDL_Quit();

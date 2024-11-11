@@ -17,4 +17,6 @@ public:
 
 private:
     SDL_Texture* m_Texture;
+
+    void Render() override;
 };
