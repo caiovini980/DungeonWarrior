@@ -123,7 +123,6 @@
     <ClInclude Include="Source\Core\Tags\CollisionTags.h" />
     <ClInclude Include="Source\Interfaces\Command.h" />
     <ClInclude Include="Source\Map\Map.h" />
-    <ClInclude Include="Source\Map\MapManager.h" />
     <ClInclude Include="Source\Map\Tile.h" />
     <ClInclude Include="Source\Objects\Input\InputManager.h" />
     <ClInclude Include="Source\Objects\Input\InputSystem.h" />
@@ -134,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Components\Collision\BoxCollider.cpp" />
+    <ClCompile Include="Source\Components\Collision\Collider.cpp" />
     <ClCompile Include="Source\Components\Collision\CollisionManager.cpp">
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -291,7 +291,6 @@
     <ClCompile Include="Source\Core\GameManager.cpp" />
     <ClCompile Include="Source\Core\GameObject.cpp" />
     <ClCompile Include="Source\Map\Map.cpp" />
-    <ClCompile Include="Source\Map\MapManager.cpp" />
     <ClCompile Include="Source\Map\Tile.cpp" />
     <ClCompile Include="Source\Objects\Input\InputManager.cpp" />
     <ClCompile Include="Source\Objects\Input\InputSystem.cpp" />

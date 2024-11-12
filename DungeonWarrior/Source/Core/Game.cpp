@@ -2,11 +2,12 @@
 #include <SDL_image.h>
 
 #include "GameManager.h"
-#include "../Map/MapManager.h"
 #include "../Objects/Input/InputSystem.h"
 #include "../Components/Collision/CollisionManager.h"
 #include "../Objects/Input/InputManager.h"
 #include "../Player/Player.h"
+#include "../Map/Map.h"
+#include "../Map/Tile.h"
 
 Game::Game(ConfigHandler& configHandler)
      : m_ConfigHandler(configHandler), m_Config(configHandler.GetWindowConfig())
@@ -17,7 +18,6 @@ Game::Game(ConfigHandler& configHandler)
 void Game::LoadGameSystems()
 {
     m_InputSystem = std::make_shared<InputSystem>();
-    
     std::cout << "Systems Initialized.\n\n";
 }
 
@@ -26,12 +26,6 @@ void Game::LoadGameManagers()
     auto gameManager = GameManager::GetInstance();
     
     m_CollisionManager = std::make_shared<CollisionManager>();
-
-    // Create Player
-    
-    // m_MapManager = std::make_shared<MapManager>(*gameManager.GetRenderer(), *m_CollisionManager, m_ConfigHandler);
-    // m_InputManager = std::make_shared<InputManager>(m_PlayerManager->GetPlayer());
-    
     std::cout << "Managers Initialized.\n\n";
 }
 
@@ -86,10 +80,15 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
     m_IsRunning = true;
 
     LoadGameSystems();
-    LoadGameManagers();
+    // LoadGameManagers();
+    
+    m_Map = &gameManager.SpawnGameObject<Map>();
+    m_Map->SetupMap(m_ConfigHandler.GetMapsConfig(), m_ConfigHandler.GetTileConfig());
     
     m_Player = &gameManager.SpawnGameObject<Player>();
     m_Player->SetupPlayer(m_ConfigHandler.GetPlayerConfig());
+
+    m_InputManager = std::make_shared<InputManager>(m_Player);
 }
 
 void Game::HandleEvents()
@@ -112,7 +111,6 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    m_Count++;
     m_InputSystem->Update();
     const InputState& state = m_InputSystem->GetState();
 
@@ -120,31 +118,23 @@ void Game::Update()
     m_InputManager->HandleInput(state);
     GameManager::GetInstance().Update();
 
-
-    
-    // m_PlayerManager->Update();
-
     // check collisions
     // player & walls
-    // for (auto& tile : m_Map->GetMapTiles())
-    // {
-    //     if (tile.GetCollider().GetCollisionType() == CollisionTypes::WALL)
-    //     {
-    //         if(m_CollisionManager->CheckCollision(m_Player->GetCollider(), tile.GetCollider()))
-    //         {
-    //             std::cout << "COLLIDING!\n";
-    //         }
-    //     }
-    // }
+    for (auto& tile : m_Map->GetMapTiles())
+    {
+        if (tile->GetCollider().GetCollisionType() == CollisionTypes::WALL)
+        {
+            if (m_CollisionManager->CheckCollision(tile->GetCollider(), m_Player->GetCollider()))
+            {
+                std::cout << "Is colliding\n";
+            }
+        }
+    }
 }
 
 void Game::Render() const
 {
     SDL_RenderClear(GameManager::GetInstance().GetRenderer());
-
-    // add stuff to render on the screen
-    // m_MapManager->Render();
-    // m_PlayerManager->Render();
 
     GameManager::GetInstance().Render();
     

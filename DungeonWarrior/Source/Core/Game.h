@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+#include "GameManager.h"
+
+class Map;
 class Player;
 class MapManager;
 class InputSystem;
@@ -34,19 +37,18 @@ private:
     // Managers
     std::shared_ptr<InputManager> m_InputManager;
     std::shared_ptr<CollisionManager> m_CollisionManager;
-    Player* m_Player;
-    std::shared_ptr<MapManager> m_MapManager;
+    // std::shared_ptr<MapManager> m_MapManager;
     
     // Systems
     std::shared_ptr<InputSystem> m_InputSystem;
 
     // Game objects
-    // std::unique_ptr<Map> m_Map;
+    Player* m_Player;
+    Map* m_Map;
     
     ConfigHandler& m_ConfigHandler;
     WindowConfig& m_Config;
     
-    int m_Count{0};
     bool m_IsRunning{false};
 
     void LoadGameManagers();

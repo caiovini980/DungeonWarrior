@@ -19,7 +19,6 @@ class Player : public GameObject
 public:
     Player();
     ~Player() override = default;
-    // Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler);
     
     void SetupPlayer(const PlayerConfig& config);
     
@@ -35,8 +34,6 @@ public:
     BoxCollider& GetCollider() const;
     
 private:
-    std::unique_ptr<BoxCollider> m_Collider;
-    
     Vector2 m_MovementDirection{0.0f, 0.0f};
 
     PlayerConfig m_Config;
@@ -48,4 +45,5 @@ private:
     };
     
     Sprite* m_Sprite;
+    BoxCollider* m_Collider;
 };

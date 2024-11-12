@@ -7,34 +7,15 @@ Player::Player()
 {
     GetTransform()->SetPosition(100, 100);
     m_Sprite = &AddComponent<Sprite>();
+    m_Collider = &AddComponent<BoxCollider>();
 }
-
-// Player::Player(SDL_Renderer& renderer, CollisionManager& collisionManager, ConfigHandler& configHandler)
-//     : m_Config(configHandler.GetPlayerConfig())
-// {
-//     // Add items to the skins array
-//     
-//     GetTransform()->SetPosition(100, 100);
-//     
-//     m_Sprite = &AddComponent<Sprite>();
-//     m_Sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
-//
-//     // m_Collider = collisionManager.CreateCollider<BoxCollider>(*m_Transform, CollisionTypes::PLAYER);
-// }
 
 void Player::SetupPlayer(const PlayerConfig& config)
 {
     m_Config = config;
     m_Sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
+    m_Collider->SetupCollider(CollisionTypes::PLAYER);
 }
-
-// void Player::Render()
-// {
-    // if (m_Sprite->GetTexture() != nullptr && m_Sprite->GetRenderer() != nullptr)
-    // {
-    //     SDL_RenderCopy(m_Sprite->GetRenderer(), m_Sprite->GetTexture(), nullptr, m_Transform->GetResultTransform());
-    // }
-// }
 
 void Player::Update()
 {
@@ -46,11 +27,6 @@ void Player::Update()
     GetTransform()->SetScale(m_Config.sizeX, m_Config.sizeY);
     // m_Collider->UpdateCollider();
 }
-
-
-// void Player::Destroy()
-// {
-// }
 
 void Player::UpdatePosition() const
 {

@@ -16,15 +16,15 @@ class GameObject;
 class InputManager
 {
 public:
-    InputManager(const std::shared_ptr<Player>& player);
+    InputManager(Player* player);
 
-    void HandleInput(const InputState& state);
+    void HandleInput(const InputState& state) const;
 
 private:
-    std::shared_ptr<Player> m_Player;
+    Player* m_Player;
     
-    std::unique_ptr<Command> m_ButtonD;
-    std::unique_ptr<Command> m_ButtonA;
-    std::unique_ptr<Command> m_ButtonW;
-    std::unique_ptr<Command> m_ButtonS;
+    // std::unique_ptr<Command> m_ButtonD;
+    // std::unique_ptr<Command> m_ButtonA;
+    // std::unique_ptr<Command> m_ButtonW;
+    // std::unique_ptr<Command> m_ButtonS;
 };

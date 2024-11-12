@@ -3,19 +3,20 @@
 
 #include "Collider.h"
 #include "../../Core/Tags/CollisionTags.h"
-#include "../Transform/Transform.h"
 
 class BoxCollider : public Collider
 {
 public:
-    BoxCollider(const std::shared_ptr<Transform>& entityTransform, CollisionTypes collisionType);
+    BoxCollider(){}
     ~BoxCollider() override = default;
     
-    void UpdateCollider();
-    
+    void SetupCollider(CollisionTypes collisionType) override;
     const CollisionTypes& GetCollisionType() const override;
+    
     const SDL_Rect& GetCollider() const;
 
 private:
+    void Update() override;
+    
     SDL_Rect m_Collider;
 };

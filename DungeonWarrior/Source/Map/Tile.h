@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <memory>
+
+#include "../Core/GameObject.h"
 #include "../Core/Tags/CollisionTags.h"
 
 class Vector2;
@@ -9,13 +11,14 @@ class Transform;
 class CollisionManager;
 struct SDL_Renderer;
 
-class Tile
+class Tile : public GameObject
 {
 public:
-    Tile(SDL_Renderer& renderer, const char* texturePath, CollisionManager& collisionManager, CollisionTypes collisionType = CollisionTypes::FLOOR);
-    ~Tile() = default;
+    Tile() = default;
+    ~Tile() override = default;
     
-    void Render();
+    // void Render();
+    void SetupTile(const char* texturePath, CollisionTypes collisionType);
     
     void SetTilePosition(const Vector2& newPosition) const;
     void SetTileSize(const Vector2& newSize) const;
@@ -23,7 +26,9 @@ public:
     BoxCollider& GetCollider() const;
 
 private:
-    std::shared_ptr<Transform> m_Transform;
-    std::shared_ptr<Sprite> m_Sprite;
-    std::shared_ptr<BoxCollider> m_Collider;
+    void Update() override;
+    
+    Sprite* m_Sprite;
+    BoxCollider* m_Collider;
+    // std::shared_ptr<BoxCollider> m_Collider;
 };

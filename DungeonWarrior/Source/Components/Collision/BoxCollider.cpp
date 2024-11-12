@@ -1,13 +1,18 @@
 ﻿#include "BoxCollider.h"
 
-BoxCollider::BoxCollider(const std::shared_ptr<Transform>& entityTransform, CollisionTypes collisionType)
-    : Collider(entityTransform, collisionType)
-{}
+#include "../../Core/GameObject.h"
+#include "../Transform/Transform.h"
 
-void BoxCollider::UpdateCollider()
+void BoxCollider::SetupCollider(CollisionTypes collisionType)
 {
-    const Vector2 size = m_Transform->GetSize();
-    const Vector2 position = m_Transform->GetPosition();
+    SetCollisionType(collisionType);
+    GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition());
+}
+
+void BoxCollider::Update()
+{
+    const Vector2 size = GetTransform()->GetSize();
+    const Vector2 position = GetTransform()->GetPosition();
 
     m_Collider.x = static_cast<int>(position.m_X);
     m_Collider.y = static_cast<int>(position.m_Y);
@@ -22,5 +27,5 @@ const SDL_Rect& BoxCollider::GetCollider() const
 
 const CollisionTypes& BoxCollider::GetCollisionType() const
 {
-    return m_CollisionType;
+    return Collider::GetCollisionType();
 }

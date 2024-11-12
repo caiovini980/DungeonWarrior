@@ -6,7 +6,8 @@ friend class GameObject;
     
 public:
     Component() = default;
-    virtual void Update() = 0;
+    
+    virtual void Update(){}
     virtual ~Component() = default;
 
     virtual void Render(){}
