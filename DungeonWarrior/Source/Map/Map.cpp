@@ -3,7 +3,7 @@
 #include "../Utils/Vector2.h"
 #include "../Utils/ConfigHandler.h"
 #include "Tile.h"
-#include "../Core/GameManager.h"
+#include "../Core/EngineManager.h"
 
 Map::Map() {}
 
@@ -17,7 +17,7 @@ void Map::SetupMap(const MapsConfig& mapConfig, const TileConfig& tileConfig)
             Vector2 tilePosition{ static_cast<float>(column), static_cast<float>(row) };
             Vector2 tileSize{ tileConfig.sizeX, tileConfig.sizeY };
 
-            Tile* tile = &GameManager::GetInstance().SpawnGameObject<Tile>();
+            Tile* tile = &EngineManager::GetInstance().SpawnGameObject<Tile>();
 
             if (texturePath == m_FloorTexturePath)
             {

@@ -1,7 +1,7 @@
 ﻿#include "Game.h"
 #include <SDL_image.h>
 
-#include "GameManager.h"
+#include "EngineManager.h"
 #include "../Objects/Input/InputSystem.h"
 #include "../Components/Collision/CollisionManager.h"
 #include "../Objects/Input/InputManager.h"
@@ -23,7 +23,7 @@ void Game::LoadGameSystems()
 
 void Game::LoadGameManagers()
 {
-    auto gameManager = GameManager::GetInstance();
+    auto gameManager = EngineManager::GetInstance();
     
     m_CollisionManager = std::make_shared<CollisionManager>();
     std::cout << "Managers Initialized.\n\n";
@@ -57,7 +57,7 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
     std::cout << "Window ... OK\n";
     
     // Initialize GameManager
-    GameManager& gameManager = GameManager::GetInstance();
+    EngineManager& gameManager = EngineManager::GetInstance();
     gameManager.SetRenderer(SDL_CreateRenderer(m_Window, -1, flags));
     
     if (!gameManager.GetRenderer())
@@ -116,35 +116,22 @@ void Game::Update()
 
     // process input
     m_InputManager->HandleInput(state);
-    GameManager::GetInstance().Update();
-
-    // check collisions
-    // player & walls
-    for (auto& tile : m_Map->GetMapTiles())
-    {
-        if (tile->GetCollider().GetCollisionType() == CollisionTypes::WALL)
-        {
-            if (m_CollisionManager->CheckCollision(tile->GetCollider(), m_Player->GetCollider()))
-            {
-                std::cout << "Is colliding\n";
-            }
-        }
-    }
+    EngineManager::GetInstance().Update();
 }
 
 void Game::Render() const
 {
-    SDL_RenderClear(GameManager::GetInstance().GetRenderer());
+    SDL_RenderClear(EngineManager::GetInstance().GetRenderer());
 
-    GameManager::GetInstance().Render();
+    EngineManager::GetInstance().Render();
     
-    SDL_RenderPresent(GameManager::GetInstance().GetRenderer());
+    SDL_RenderPresent(EngineManager::GetInstance().GetRenderer());
 }
 
 void Game::Clean() const
 {
     SDL_DestroyWindow(m_Window);
-    SDL_DestroyRenderer(GameManager::GetInstance().GetRenderer());
+    SDL_DestroyRenderer(EngineManager::GetInstance().GetRenderer());
     SDL_Quit();
     
     std::cout << "Execution cleaned.\n";

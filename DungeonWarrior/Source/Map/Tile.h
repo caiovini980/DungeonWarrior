@@ -17,7 +17,6 @@ public:
     Tile() = default;
     ~Tile() override = default;
     
-    // void Render();
     void SetupTile(const char* texturePath, CollisionTypes collisionType);
     
     void SetTilePosition(const Vector2& newPosition) const;
@@ -30,5 +29,4 @@ private:
     
     Sprite* m_Sprite;
     BoxCollider* m_Collider;
-    // std::shared_ptr<BoxCollider> m_Collider;
 };

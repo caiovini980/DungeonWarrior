@@ -12,9 +12,3 @@ bool CollisionManager::CheckCollision(const BoxCollider& colliderA, const BoxCol
         rectB.y + rectB.h >= rectA.y
     );
 }
-
-template<typename T, typename = std::enable_if_t<std::is_base_of_v<Collider, T>>>
-std::unique_ptr<T> CollisionManager::CreateCollider(Transform& entityTransform, CollisionTypes collisionType)
-{
-    return std::make_unique<T>(entityTransform, collisionType);
-}

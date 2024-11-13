@@ -15,6 +15,7 @@ void Player::SetupPlayer(const PlayerConfig& config)
     m_Config = config;
     m_Sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
     m_Collider->SetupCollider(CollisionTypes::PLAYER);
+    m_Collider->SetCollisionMapValue(CollisionTypes::WALL, true);
 }
 
 void Player::Update()
@@ -25,7 +26,6 @@ void Player::Update()
     m_MovementDirection.m_Y = 0.0f;
     
     GetTransform()->SetScale(m_Config.sizeX, m_Config.sizeY);
-    // m_Collider->UpdateCollider();
 }
 
 void Player::UpdatePosition() const

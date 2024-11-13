@@ -12,6 +12,7 @@ void Tile::SetupTile(const char* texturePath, CollisionTypes collisionType)
 
     m_Collider = &AddComponent<BoxCollider>();
     m_Collider->SetupCollider(collisionType);
+    m_Collider->SetCollisionMapValue(CollisionTypes::PLAYER, true);
 }
 
 void Tile::SetTilePosition(const Vector2& newPosition) const

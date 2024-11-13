@@ -7,16 +7,15 @@
 class BoxCollider : public Collider
 {
 public:
-    BoxCollider(){}
+    BoxCollider();
     ~BoxCollider() override = default;
     
     void SetupCollider(CollisionTypes collisionType) override;
-    const CollisionTypes& GetCollisionType() const override;
     
     const SDL_Rect& GetCollider() const;
 
 private:
     void Update() override;
-    
+
     SDL_Rect m_Collider;
 };

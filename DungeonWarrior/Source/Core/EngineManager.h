@@ -2,26 +2,31 @@
 #include <memory>
 #include <SDL_render.h>
 #include <vector>
+#include "../Components/Collision/BoxCollider.h"
 
+class BoxCollider;
 class GameObject;
+class Collider;
 
-class GameManager
+class EngineManager
 {
 public:
-    GameManager() = default;
-    ~GameManager() = default;
+    EngineManager() = default;
+    ~EngineManager() = default;
 
-    GameManager& operator=(const GameManager&) = delete;
+    EngineManager& operator=(const EngineManager&) = delete;
     
-    static GameManager& GetInstance();
+    static EngineManager& GetInstance();
     
     SDL_Renderer* GetRenderer() const { return m_Renderer; }
     void SetRenderer(SDL_Renderer* renderer) { m_Renderer = renderer; }
     
-    void Update() const;
+    void Update();
     void Render() const;
     void Destroy(GameObject* gameObject);
 
+    void RegisterCollider(Collider* collider);
+    
     // Templates
     template<typename T>
     T& SpawnGameObject()
@@ -32,11 +37,20 @@ public:
         m_GameObjects.push_back(std::static_pointer_cast<GameObject>(newObject));
         return *newObject.get();
     }
+
+    // TODO create methods that handle each collision (box-box, box-sphere, etc.)
+
+    bool CheckCollision(Collider* colliderA, Collider* colliderB);
+    bool CheckCollision(BoxCollider* colliderA, BoxCollider* colliderB);
+    
     
 private:
-    static GameManager* m_Instance;
+    static EngineManager* m_Instance;
     
     std::vector<std::shared_ptr<GameObject>> m_GameObjects;
+
+    // TODO Remove null colliders
+    std::vector<Collider*> m_Colliders;
 
     SDL_Renderer* m_Renderer{};
 };

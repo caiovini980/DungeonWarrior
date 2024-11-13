@@ -9,7 +9,7 @@ class Component;
 
 class GameObject
 {
-    friend class GameManager;
+    friend class EngineManager;
 
 public:
     GameObject();
@@ -31,7 +31,7 @@ protected:
 
         return *newComponent.get();
     }
-    
+
 private:
     void Render() const;
     void UpdateComponents() const;

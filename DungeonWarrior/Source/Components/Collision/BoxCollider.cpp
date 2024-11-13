@@ -1,16 +1,20 @@
 ﻿#include "BoxCollider.h"
 
-#include "../../Core/GameObject.h"
 #include "../Transform/Transform.h"
+
+BoxCollider::BoxCollider() : Collider(E_ColliderShape::Box)
+{
+}
 
 void BoxCollider::SetupCollider(CollisionTypes collisionType)
 {
     SetCollisionType(collisionType);
-    GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition());
 }
 
 void BoxCollider::Update()
 {
+    Collider::Update();
+    
     const Vector2 size = GetTransform()->GetSize();
     const Vector2 position = GetTransform()->GetPosition();
 
@@ -23,9 +27,4 @@ void BoxCollider::Update()
 const SDL_Rect& BoxCollider::GetCollider() const
 {
     return m_Collider;
-}
-
-const CollisionTypes& BoxCollider::GetCollisionType() const
-{
-    return Collider::GetCollisionType();
 }

@@ -118,7 +118,7 @@
     <ClInclude Include="Source\Components\Sprite\Sprite.h" />
     <ClInclude Include="Source\Components\Transform\Transform.h" />
     <ClInclude Include="Source\Core\Game.h" />
-    <ClInclude Include="Source\Core\GameManager.h" />
+    <ClInclude Include="Source\Core\EngineManager.h" />
     <ClInclude Include="Source\Core\GameObject.h" />
     <ClInclude Include="Source\Core\Tags\CollisionTags.h" />
     <ClInclude Include="Source\Interfaces\Command.h" />
@@ -288,7 +288,7 @@
     <ClCompile Include="Source\Components\Sprite\Sprite.cpp" />
     <ClCompile Include="Source\Components\Transform\Transform.cpp" />
     <ClCompile Include="Source\Core\Game.cpp" />
-    <ClCompile Include="Source\Core\GameManager.cpp" />
+    <ClCompile Include="Source\Core\EngineManager.cpp" />
     <ClCompile Include="Source\Core\GameObject.cpp" />
     <ClCompile Include="Source\Map\Map.cpp" />
     <ClCompile Include="Source\Map\Tile.cpp" />

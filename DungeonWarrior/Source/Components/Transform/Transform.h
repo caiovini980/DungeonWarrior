@@ -17,16 +17,17 @@ public:
     void AddPosition(const Vector2& addedPosition);
     
     void SetScale(float x, float y);
-    
-    Vector2& GetPosition() const;
-    Vector2& GetSize() const;
+    void SetScale(const Vector2& newScale);
 
-    SDL_Rect* GetResultTransform();
+    const Vector2& GetPosition() const;
+    const Vector2& GetSize() const;
+
+    SDL_Rect* GetSDLRect();
 
 private:
-    std::unique_ptr<Vector2> m_Position;
-    std::unique_ptr<Vector2> m_Scale;
-    // rotation?
+    Vector2 m_Position;
+    Vector2 m_Scale;
+    Vector2 m_PreviousValidPosition;
 
     SDL_Rect m_ResultRect;
     SDL_Rect m_SourceRect;

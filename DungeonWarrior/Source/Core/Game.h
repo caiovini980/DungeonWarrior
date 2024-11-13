@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "GameManager.h"
+#include "EngineManager.h"
 
 class Map;
 class Player;
@@ -37,7 +37,6 @@ private:
     // Managers
     std::shared_ptr<InputManager> m_InputManager;
     std::shared_ptr<CollisionManager> m_CollisionManager;
-    // std::shared_ptr<MapManager> m_MapManager;
     
     // Systems
     std::shared_ptr<InputSystem> m_InputSystem;
