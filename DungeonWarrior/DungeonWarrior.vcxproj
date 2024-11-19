@@ -106,10 +106,10 @@
   <ItemGroup>
     <ClInclude Include="Libraries\nlohmann\json.hpp" />
     <ClInclude Include="Libraries\nlohmann\json_fwd.hpp" />
-    <ClInclude Include="Source\Core\Tags\CollisionTags.h" />
     <ClInclude Include="Source\Engine\Components\Collision\BoxCollider.h" />
     <ClInclude Include="Source\Engine\Components\Collision\Collider.h" />
     <ClInclude Include="Source\Engine\Components\Collision\CollisionManager.h" />
+    <ClInclude Include="Source\Engine\Components\Collision\CollisionTags.h" />
     <ClInclude Include="Source\Engine\Components\Collision\LineSegment.h" />
     <ClInclude Include="Source\Engine\Components\Component.h" />
     <ClInclude Include="Source\Engine\Components\Sprite\Sprite.h" />

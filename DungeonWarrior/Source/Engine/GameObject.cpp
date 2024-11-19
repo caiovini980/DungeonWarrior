@@ -6,7 +6,7 @@
 #include "Engine/Components/Transform/Transform.h"
 
 GameObject::GameObject()
-    : m_Transform(std::make_unique<Transform>())
+    : m_Transform(&AddComponent<Transform>())
 {
     // std::cout << "Constructing game object\n";
 }
@@ -28,5 +28,15 @@ void GameObject::UpdateComponents() const
     for (auto& element : m_Components)
     {
         element->Update();
+    }
+}
+
+void GameObject::LateUpdateComponents()
+{
+    if (m_Components.empty()) return;
+
+    for (auto& element : m_Components)
+    {
+        element->LateUpdate();
     }
 }

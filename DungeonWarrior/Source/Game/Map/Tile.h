@@ -2,7 +2,7 @@
 #include <memory>
 
 #include "Engine/GameObject.h"
-#include "Core/Tags/CollisionTags.h"
+#include "Engine/Components/Collision/CollisionTags.h"
 
 class Vector2;
 class BoxCollider;
@@ -19,8 +19,8 @@ public:
     
     void SetupTile(const char* texturePath, CollisionTypes collisionType);
     
-    void SetTilePosition(const Vector2& newPosition) const;
-    void SetTileSize(const Vector2& newSize) const;
+    void SetTilePosition(const Vector2& newPosition) ;
+    void SetTileSize(const Vector2& newSize) ;
     
     BoxCollider& GetCollider() const;
 

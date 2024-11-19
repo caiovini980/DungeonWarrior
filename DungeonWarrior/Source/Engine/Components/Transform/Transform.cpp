@@ -8,11 +8,13 @@ Transform::Transform()
     
 }
 
+void Transform::LateUpdate()
+{
+    m_PreviousPosition = m_Position;
+}
 
 void Transform::SetPosition(float x, float y)
 {
-    m_PreviousValidPosition = m_Position;
-    
     m_ResultRect.x = static_cast<int>(x);
     m_ResultRect.y = static_cast<int>(y);
 
@@ -57,4 +59,9 @@ const Vector2& Transform::GetSize() const
 SDL_Rect* Transform::GetSDLRect()
 {
     return &m_ResultRect;
+}
+
+Vector2 Transform::GetPreviousPosition() const
+{
+    return m_PreviousPosition;
 }

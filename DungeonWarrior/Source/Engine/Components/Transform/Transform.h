@@ -4,9 +4,10 @@
 #include <SDL_rect.h>
 #include <string>
 
+#include "Engine/Components/Component.h"
 #include "Utils/Vector2.h"
 
-class Transform
+class Transform : public Component
 {
 public:
     Transform();
@@ -24,10 +25,14 @@ public:
 
     SDL_Rect* GetSDLRect();
 
+    Vector2 GetPreviousPosition() const;
+
 private:
+    void LateUpdate() override;
+    
     Vector2 m_Position;
     Vector2 m_Scale;
-    Vector2 m_PreviousValidPosition;
+    Vector2 m_PreviousPosition;
 
     SDL_Rect m_ResultRect;
     SDL_Rect m_SourceRect;

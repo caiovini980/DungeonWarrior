@@ -13,6 +13,7 @@ Collider::Collider(E_ColliderShape newShape)
         {CollisionTypes::FLOOR, false}
     }
 {
+    
     EngineManager::GetInstance().RegisterCollider(this);
 }
 

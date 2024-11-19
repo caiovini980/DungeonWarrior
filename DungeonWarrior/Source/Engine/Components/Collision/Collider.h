@@ -5,7 +5,7 @@
 #include <string>
 
 #include "../Component.h"
-#include "Core/Tags/CollisionTags.h"
+#include "CollisionTags.h"
 
 class Transform;
 

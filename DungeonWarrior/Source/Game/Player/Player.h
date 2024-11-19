@@ -24,7 +24,7 @@ public:
     
     void Update() override;
 
-    void UpdatePosition() const;
+    void UpdatePosition();
 
     void MoveRight();
     void MoveLeft();

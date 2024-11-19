@@ -2,7 +2,7 @@
 #include <SDL_rect.h>
 
 #include "Collider.h"
-#include "Core/Tags/CollisionTags.h"
+#include "CollisionTags.h"
 
 class BoxCollider : public Collider
 {

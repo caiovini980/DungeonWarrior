@@ -3,15 +3,16 @@
 #include <assert.h>
 #include <iostream>
 
+#include "Components/Transform/Transform.h"
 #include "Engine/GameObject.h"
 
-EngineManager* EngineManager::m_Instance;
+std::shared_ptr<EngineManager> EngineManager::m_Instance;
 
 EngineManager& EngineManager::GetInstance()
 {
     if (!m_Instance)
     {
-        m_Instance = new EngineManager();
+        m_Instance = std::make_shared<EngineManager>();
     }
     
     return *m_Instance;
@@ -25,18 +26,24 @@ void EngineManager::Update()
         element->Update();
     }
 
-    for (Collider* colliderA : m_Colliders)
+    for (auto colliderA : m_Colliders)
     {
-        for (Collider* colliderB : m_Colliders)
+        for (auto colliderB : m_Colliders)
         {
-            if (colliderA == colliderB) continue;
+            SDL_Rect result {};
             
-            if (CheckCollision(colliderA, colliderB))
+            if (CheckCollision(colliderA, colliderB, &result))
             {
                 std::cout << "Is colliding!\n";
-                
+                // const std::shared_ptr<Transform> transform = colA->GetOwner()->GetTransform();
+                // transform->SetPosition(transform->GetPreviousPosition());
             }
         }
+    }
+
+    for (auto& element : m_GameObjects)
+    {
+        element->LateUpdateComponents();
     }
 }
 
@@ -69,7 +76,7 @@ void EngineManager::RegisterCollider(Collider* collider)
     m_Colliders.push_back(collider);
 }
 
-bool EngineManager::CheckCollision(Collider* colliderA, Collider* colliderB)
+SDL_bool EngineManager::CheckCollision(Collider* colliderA, Collider* colliderB, SDL_Rect* result)
 {
     if (colliderA->GetColliderShape() == E_ColliderShape::Box &&
         colliderB->GetColliderShape() == E_ColliderShape::Box)
@@ -77,23 +84,20 @@ bool EngineManager::CheckCollision(Collider* colliderA, Collider* colliderB)
         if (colliderA->GetCollisionMapValue(colliderB->GetCollisionType()) &&
             colliderB->GetCollisionMapValue(colliderA->GetCollisionType()))
         {
-            return CheckCollision(dynamic_cast<BoxCollider*>(colliderA), dynamic_cast<BoxCollider*>(colliderB));
+            return CheckCollision(dynamic_cast<BoxCollider*>(colliderA), dynamic_cast<BoxCollider*>(colliderB), result);
         }
     }
 
-    return false;
+    return SDL_FALSE;
 }
 
-bool EngineManager::CheckCollision(BoxCollider* colliderA, BoxCollider* colliderB)
+SDL_bool EngineManager::CheckCollision(BoxCollider* colliderA, BoxCollider* colliderB, SDL_Rect* result)
 {
     // if both are BoxCollider, do AABB
     SDL_Rect rectA = colliderA->GetCollider();
     SDL_Rect rectB = colliderB->GetCollider();
-        
+    
     return (
-        rectA.x + rectA.w >= rectB.x &&
-        rectA.y + rectA.h >= rectB.y &&
-        rectB.x + rectB.w >= rectA.x &&
-        rectB.y + rectB.h >= rectA.y
+        SDL_IntersectRect(&rectA, &rectB, result)
     );
 }

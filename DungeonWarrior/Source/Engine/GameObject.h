@@ -15,7 +15,10 @@ public:
     GameObject();
     virtual ~GameObject() = default;
     
-    Transform* GetTransform() const { return m_Transform.get(); }
+    Transform* GetTransform()
+    {
+        return m_Transform;
+    }
 
 protected:
     virtual void Update() = 0;
@@ -35,7 +38,8 @@ protected:
 private:
     void Render() const;
     void UpdateComponents() const;
+    void LateUpdateComponents();
 
     std::vector<std::shared_ptr<Component>> m_Components;
-    std::shared_ptr<Transform> m_Transform;
+    Transform* m_Transform;
 };

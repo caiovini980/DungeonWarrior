@@ -38,12 +38,12 @@ public:
         return *newObject.get();
     }
 
-    bool CheckCollision(Collider* colliderA, Collider* colliderB);
-    bool CheckCollision(BoxCollider* colliderA, BoxCollider* colliderB);
+    SDL_bool CheckCollision(Collider* colliderA, Collider* colliderB, SDL_Rect* result);
+    SDL_bool CheckCollision(BoxCollider* colliderA, BoxCollider* colliderB, SDL_Rect* result);
     
     
 private:
-    static EngineManager* m_Instance;
+    static std::shared_ptr<EngineManager> m_Instance;
     
     std::vector<std::shared_ptr<GameObject>> m_GameObjects;
 

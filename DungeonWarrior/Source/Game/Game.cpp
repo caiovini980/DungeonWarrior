@@ -8,7 +8,6 @@
 #include "Game/Input/InputManager.h"
 #include "Game/Player/Player.h"
 #include "Game/Map/Map.h"
-#include "Game/Map/Tile.h"
 
 Game::Game(ConfigHandler& configHandler)
      : m_ConfigHandler(configHandler), m_Config(configHandler.GetWindowConfig())

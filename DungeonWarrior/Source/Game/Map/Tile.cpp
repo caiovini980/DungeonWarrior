@@ -15,7 +15,7 @@ void Tile::SetupTile(const char* texturePath, CollisionTypes collisionType)
     m_Collider->SetCollisionMapValue(CollisionTypes::PLAYER, true);
 }
 
-void Tile::SetTilePosition(const Vector2& newPosition) const
+void Tile::SetTilePosition(const Vector2& newPosition)
 {
     GetTransform()->SetPosition(
         newPosition.m_X * GetTransform()->GetSize().m_X,
@@ -23,7 +23,7 @@ void Tile::SetTilePosition(const Vector2& newPosition) const
         );
 }
 
-void Tile::SetTileSize(const Vector2& newSize) const
+void Tile::SetTileSize(const Vector2& newSize) 
 {
     GetTransform()->SetScale(newSize.m_X, newSize.m_Y);
 }

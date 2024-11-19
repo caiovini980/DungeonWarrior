@@ -28,7 +28,7 @@ void Player::Update()
     GetTransform()->SetScale(m_Config.sizeX, m_Config.sizeY);
 }
 
-void Player::UpdatePosition() const
+void Player::UpdatePosition()
 {
     Vector2 normDir = m_MovementDirection.Normalized();
     normDir *= m_Config.speed;
