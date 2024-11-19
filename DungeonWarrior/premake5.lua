@@ -6,16 +6,11 @@ project "DungeonWarrior"
 
     targetdir("../bin/" .. outputdir .. "/%{prj.name}")
     objdir("../bin-int/" .. outputdir .. "/%{prj.name}")
-    
-    files {
-        "Assets/**.png",
-        "Libraries/**.hpp",
-        "Source/**.cpp",
-        "Source/**.h",
-        "Settings/**.json",
-    }
 
-    includedirs { "../Include/required-includes" } -- C/C++ -> General -> Additional Include Directories
+    includedirs { 
+        "../Include/required-includes",
+        "Source"    
+    } -- C/C++ -> General -> Additional Include Directories
     
     libdirs { "../Include/required-libs" } -- Linker -> General -> Additional Library Directories
 
@@ -24,6 +19,14 @@ project "DungeonWarrior"
         "SDL2main", 
         "SDL2_image" 
     } 
+    
+    files {
+        "Assets/**.png",
+        "Libraries/**.hpp",
+        "Source/**.cpp",
+        "Source/**.h",
+        "Settings/**.json",
+    }
 
     defines {
         "WINDOWS"

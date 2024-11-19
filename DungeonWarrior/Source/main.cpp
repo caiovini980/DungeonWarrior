@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 
-#include "./Core/Game.h"
+#include "Game/Game.h"
 #include "Utils/ConfigHandler.h"
 
 int main(int argc, char* argv[])
