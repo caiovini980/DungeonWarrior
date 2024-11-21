@@ -26,13 +26,17 @@ void EngineManager::Update()
         element->Update();
     }
 
-    for (auto colliderA : m_Colliders)
+    for (auto& colliderA : m_Colliders)
     {
-        for (auto colliderB : m_Colliders)
+        if (colliderA.expired()) { continue; }
+        
+        for (auto& colliderB : m_Colliders)
         {
+            if (colliderB.expired()) { continue; }
+            
             SDL_Rect result {};
             
-            if (CheckCollision(colliderA, colliderB, &result))
+            if (CheckCollision(colliderA.lock().get(), colliderB.lock().get(), &result))
             {
                 std::cout << "Is colliding!\n";
                 // const std::shared_ptr<Transform> transform = colA->GetOwner()->GetTransform();
@@ -70,9 +74,9 @@ void EngineManager::Destroy(GameObject* gameObject)
     }
 }
 
-void EngineManager::RegisterCollider(Collider* collider)
+void EngineManager::RegisterCollider(const std::weak_ptr<Collider>& collider)
 {
-    assert(collider, "Must register a valid collider.\n");
+    assert(collider.lock(), "Must register a valid collider.\n");
     m_Colliders.push_back(collider);
 }
 

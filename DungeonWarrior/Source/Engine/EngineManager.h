@@ -25,7 +25,7 @@ public:
     void Render() const;
     void Destroy(GameObject* gameObject);
 
-    void RegisterCollider(Collider* collider);
+    void RegisterCollider(const std::weak_ptr<Collider>& collider);
     
     // Templates
     template<typename T>
@@ -46,9 +46,7 @@ private:
     static std::shared_ptr<EngineManager> m_Instance;
     
     std::vector<std::shared_ptr<GameObject>> m_GameObjects;
-
-    // TODO Remove null colliders
-    std::vector<Collider*> m_Colliders;
+    std::vector<std::weak_ptr<Collider>> m_Colliders;
 
     SDL_Renderer* m_Renderer{};
 };

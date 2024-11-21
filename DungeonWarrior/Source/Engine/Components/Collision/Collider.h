@@ -14,7 +14,7 @@ enum class E_ColliderShape : uint8_t
     Box
 };
 
-class Collider : public Component
+class Collider : public Component, public std::enable_shared_from_this<Collider>
 {
 public:
     Collider(E_ColliderShape newShape);
@@ -23,7 +23,7 @@ public:
     CollisionTypes GetCollisionType() const { return m_CollisionType; }
     E_ColliderShape GetColliderShape() const { return m_Shape; } 
 
-    void SetCollisionMapValue(CollisionTypes type, bool canCollide);
+    void SetCollisionMapValue(const CollisionTypes type, bool canCollide);
     bool GetCollisionMapValue(CollisionTypes type);
     
 protected:

@@ -1,6 +1,7 @@
 ﻿#include "BoxCollider.h"
 
 #include "../Transform/Transform.h"
+#include "Engine/EngineManager.h"
 
 BoxCollider::BoxCollider() : Collider(E_ColliderShape::Box)
 {
@@ -9,6 +10,7 @@ BoxCollider::BoxCollider() : Collider(E_ColliderShape::Box)
 void BoxCollider::SetupCollider(CollisionTypes collisionType)
 {
     SetCollisionType(collisionType);
+    EngineManager::GetInstance().RegisterCollider(weak_from_this());
 }
 
 void BoxCollider::Update()

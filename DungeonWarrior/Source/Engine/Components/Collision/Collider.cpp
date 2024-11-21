@@ -14,7 +14,6 @@ Collider::Collider(E_ColliderShape newShape)
     }
 {
     
-    EngineManager::GetInstance().RegisterCollider(this);
 }
 
 void Collider::SetCollisionMapValue(const CollisionTypes type, const bool canCollide)
@@ -22,7 +21,7 @@ void Collider::SetCollisionMapValue(const CollisionTypes type, const bool canCol
     m_CollisionMap[type] = canCollide;
 }
 
-bool Collider::GetCollisionMapValue(const CollisionTypes type)
+bool Collider::GetCollisionMapValue(CollisionTypes type)
 {
     return m_CollisionMap[type];
 }
