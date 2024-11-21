@@ -17,22 +17,22 @@ public:
     
     Transform* GetTransform()
     {
-        return m_Transform;
+        return m_Transform.lock().get();
     }
 
 protected:
     virtual void Update() = 0;
     
     template<typename T>
-    T& AddComponent()
+    std::shared_ptr<T>& AddComponent()
     {
         static_assert(std::is_base_of_v<Component, T>, "The class must be a Component to be added to a GameObject");
 
         std::shared_ptr<T> newComponent {std::make_shared<T>()};
         m_Components.push_back(std::static_pointer_cast<Component>(newComponent));
-        m_Components.back().get()->Setup(this);
+        m_Components.back()->Setup(this);
 
-        return *newComponent.get();
+        return newComponent;
     }
 
 private:
@@ -41,5 +41,5 @@ private:
     void LateUpdateComponents();
 
     std::vector<std::shared_ptr<Component>> m_Components;
-    Transform* m_Transform;
+    std::weak_ptr<Transform> m_Transform;
 };

@@ -44,6 +44,6 @@ private:
         "Assets/Sprites/player_green.png"
     };
     
-    Sprite* m_Sprite;
-    BoxCollider* m_Collider;
+    std::weak_ptr<Sprite> m_Sprite;
+    std::weak_ptr<BoxCollider> m_Collider;
 };

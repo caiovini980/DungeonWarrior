@@ -6,16 +6,23 @@
 Player::Player()
 {
     GetTransform()->SetPosition(100, 100);
-    m_Sprite = &AddComponent<Sprite>();
-    m_Collider = &AddComponent<BoxCollider>();
+    m_Sprite = AddComponent<Sprite>();
+    m_Collider = AddComponent<BoxCollider>();
 }
 
 void Player::SetupPlayer(const PlayerConfig& config)
 {
     m_Config = config;
-    m_Sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
-    m_Collider->SetupCollider(CollisionTypes::PLAYER);
-    m_Collider->SetCollisionMapValue(CollisionTypes::WALL, true);
+    if (auto sprite = m_Sprite.lock())
+    {
+        sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
+    }
+
+    if (auto collider = m_Collider.lock())
+    {
+        collider->SetupCollider(CollisionTypes::PLAYER);
+        collider->SetCollisionMapValue(CollisionTypes::WALL, true);
+    }
 }
 
 void Player::Update()
@@ -58,10 +65,10 @@ void Player::MoveDown()
 
 BoxCollider& Player::GetCollider() const
 {
-    if (m_Collider == nullptr)
+    if (m_Collider.lock() == nullptr)
     {
         std::cerr << "ERROR: Class 'Player' don't have a collider.\n";
     }
     
-    return *m_Collider;
+    return *m_Collider.lock();
 }

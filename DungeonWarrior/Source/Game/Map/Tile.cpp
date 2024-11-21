@@ -7,12 +7,18 @@
 
 void Tile::SetupTile(const char* texturePath, CollisionTypes collisionType)
 {
-    m_Sprite = &AddComponent<Sprite>();
-    m_Sprite->SetTexture(texturePath);
-
-    m_Collider = &AddComponent<BoxCollider>();
-    m_Collider->SetupCollider(collisionType);
-    m_Collider->SetCollisionMapValue(CollisionTypes::PLAYER, true);
+    m_Sprite = AddComponent<Sprite>();
+    if (auto sprite = m_Sprite.lock())
+    {
+        sprite->SetTexture(texturePath);
+    }
+    
+    m_Collider = AddComponent<BoxCollider>();
+    if (auto collider = m_Collider.lock())
+    {
+        collider->SetupCollider(collisionType);
+        collider->SetCollisionMapValue(CollisionTypes::PLAYER, true);
+    }
 }
 
 void Tile::SetTilePosition(const Vector2& newPosition)
@@ -30,7 +36,7 @@ void Tile::SetTileSize(const Vector2& newSize)
 
 BoxCollider& Tile::GetCollider() const
 {
-    return *m_Collider;
+    return *m_Collider.lock();
 }
 
 void Tile::Update()

@@ -6,7 +6,7 @@
 #include "Engine/Components/Transform/Transform.h"
 
 GameObject::GameObject()
-    : m_Transform(&AddComponent<Transform>())
+    : m_Transform(AddComponent<Transform>())
 {
     // std::cout << "Constructing game object\n";
 }
