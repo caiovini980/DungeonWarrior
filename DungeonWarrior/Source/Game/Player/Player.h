@@ -23,6 +23,7 @@ public:
     void SetupPlayer(const PlayerConfig& config);
     
     void Update() override;
+    void LateUpdate() override;
 
     void UpdatePosition();
 
@@ -34,7 +35,7 @@ public:
     BoxCollider& GetCollider() const;
     
 private:
-    Vector2 m_MovementDirection{0.0f, 0.0f};
+    // Vector2 m_MovementDirection{0.0f, 0.0f};
 
     PlayerConfig m_Config;
 

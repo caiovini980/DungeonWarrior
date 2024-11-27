@@ -5,7 +5,7 @@
 #include "Engine/Components/Transform/Transform.h"
 #include "Engine/Components/Sprite/Sprite.h"
 
-void Tile::SetupTile(const char* texturePath, CollisionTypes collisionType)
+void Tile::SetupTile(const char* texturePath, CollisionTags collisionTag)
 {
     m_Sprite = AddComponent<Sprite>();
     if (auto sprite = m_Sprite.lock())
@@ -16,8 +16,8 @@ void Tile::SetupTile(const char* texturePath, CollisionTypes collisionType)
     m_Collider = AddComponent<BoxCollider>();
     if (auto collider = m_Collider.lock())
     {
-        collider->SetupCollider(collisionType);
-        collider->SetCollisionMapValue(CollisionTypes::PLAYER, true);
+        collider->SetupCollider(collisionTag);
+        collider->SetCollisionMapValue(CollisionTags::PLAYER, true);
     }
 }
 

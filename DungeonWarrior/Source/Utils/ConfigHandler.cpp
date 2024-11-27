@@ -6,6 +6,7 @@ ConfigHandler::ConfigHandler()
     LoadPlayerConfigs();
     LoadTileConfigs();
     LoadMapConfigs(0);
+    LoadObstacleConfigs();
 }
 
 JSON ConfigHandler::GetParsedJSON(const std::string& path)
@@ -69,6 +70,16 @@ void ConfigHandler::LoadMapConfigs(int mapId)
     m_MapsConfig.layout = requestedMapInfo["layout"].get<const std::vector<std::vector<int>>>();
 }
 
+void ConfigHandler::LoadObstacleConfigs()
+{
+    JSON obstacleData = GetParsedJSON(*OBSTACLE_CONFIG_PATH);
+        
+    // TODO maybe remove these strings?
+    m_ObstacleConfig.textureIndex = obstacleData["textureIndex"].get<const int>();
+    m_ObstacleConfig.sizeX = obstacleData["size"]["x"].get<const float>();
+    m_ObstacleConfig.sizeY = obstacleData["size"]["y"].get<const float>();
+}
+
 PlayerConfig& ConfigHandler::GetPlayerConfig()
 {
     return m_PlayerConfig;
@@ -88,3 +99,9 @@ WindowConfig& ConfigHandler::GetWindowConfig()
 {
     return m_WindowConfig;
 }
+
+ObstacleConfig& ConfigHandler::GetObstacleConfig()
+{
+    return m_ObstacleConfig;
+}
+

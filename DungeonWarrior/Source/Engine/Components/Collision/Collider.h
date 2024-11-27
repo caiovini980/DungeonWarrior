@@ -18,27 +18,27 @@ class Collider : public Component, public std::enable_shared_from_this<Collider>
 {
 public:
     Collider(E_ColliderShape newShape);
-    virtual ~Collider() override = default;
+    ~Collider() override = default;
     
-    CollisionTypes GetCollisionType() const { return m_CollisionType; }
+    CollisionTags GetCollisionTag() const { return m_CollisionTag; }
     E_ColliderShape GetColliderShape() const { return m_Shape; } 
 
-    void SetCollisionMapValue(const CollisionTypes type, bool canCollide);
-    bool GetCollisionMapValue(CollisionTypes type);
+    void SetCollisionMapValue(const CollisionTags tag, bool canCollide);
+    bool GetCollisionMapValue(CollisionTags tag);
     
 protected:
-    virtual void SetupCollider(const CollisionTypes collisionType) = 0;
+    virtual void SetupCollider(const CollisionTags collisionTag) = 0;
     virtual void Update() override;
 
-    void SetCollisionType(const CollisionTypes newType) { m_CollisionType = newType; }
+    void SetCollisionTag(const CollisionTags newTag) { m_CollisionTag = newTag; }
     
     Transform* GetTransform() const { return m_Transform.get(); }
     
 private:
     std::shared_ptr<Transform> m_Transform;
 
-    CollisionTypes m_CollisionType;
+    CollisionTags m_CollisionTag;
     const E_ColliderShape m_Shape;
 
-    std::map<CollisionTypes, bool> m_CollisionMap{};
+    std::map<CollisionTags, bool> m_CollisionMap{};
 };

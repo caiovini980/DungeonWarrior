@@ -10,7 +10,7 @@ public:
     BoxCollider();
     ~BoxCollider() override = default;
     
-    void SetupCollider(CollisionTypes collisionType) override;
+    void SetupCollider(CollisionTags collisionTag) override;
     
     const SDL_Rect& GetCollider() const;
 

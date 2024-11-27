@@ -11,6 +11,10 @@ GameObject::GameObject()
     // std::cout << "Constructing game object\n";
 }
 
+void GameObject::LateUpdate()
+{
+}
+
 void GameObject::Render() const
 {
     if (m_Components.empty()) return;

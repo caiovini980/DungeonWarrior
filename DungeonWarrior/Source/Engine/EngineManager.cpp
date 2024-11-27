@@ -38,15 +38,55 @@ void EngineManager::Update()
             
             if (CheckCollision(colliderA.lock().get(), colliderB.lock().get(), &result))
             {
-                std::cout << "Is colliding!\n";
-                // const std::shared_ptr<Transform> transform = colA->GetOwner()->GetTransform();
-                // transform->SetPosition(transform->GetPreviousPosition());
+                // std::cout << "Is colliding!\n";
+
+                // apply collision just to player
+                // get just the player transform
+                std::shared_ptr<Transform> transform;
+                if (colliderA.lock()->GetCollisionTag() == CollisionTags::PLAYER)
+                {
+                    transform = colliderA.lock()->GetOwner()->GetTransform();
+                }
+                else if (colliderB.lock()->GetCollisionTag() == CollisionTags::PLAYER)
+                {
+                    transform = colliderB.lock()->GetOwner()->GetTransform();
+                }
+
+                // check horizontal movement
+                // the new position will be derived from the object's current position
+                Vector2 newPosition = transform->GetPosition();
+                float collisionOffset = 4.0f;
+                if (transform->GetDirection().m_X > 0)
+                {
+                    // go left
+                    newPosition.m_X = transform->GetPosition().m_X - (static_cast<float>(result.w) + collisionOffset);
+                }
+                if (transform->GetDirection().m_X < 0)
+                {
+                    // go right
+                    newPosition.m_X = transform->GetPosition().m_X + (static_cast<float>(result.w) + collisionOffset);
+                }
+
+                // check vertical movement
+                if (transform->GetDirection().m_Y > 0)
+                {
+                    // go up
+                    newPosition.m_Y = transform->GetPosition().m_Y - (static_cast<float>(result.h) + collisionOffset);
+                }
+                if (transform->GetDirection().m_Y < 0)
+                {
+                    // go down
+                    newPosition.m_Y = transform->GetPosition().m_Y + (static_cast<float>(result.h) + collisionOffset);
+                }
+                
+                transform->SetPosition(newPosition);
             }
         }
     }
 
     for (auto& element : m_GameObjects)
     {
+        element->LateUpdate();
         element->LateUpdateComponents();
     }
 }
@@ -85,8 +125,8 @@ SDL_bool EngineManager::CheckCollision(Collider* colliderA, Collider* colliderB,
     if (colliderA->GetColliderShape() == E_ColliderShape::Box &&
         colliderB->GetColliderShape() == E_ColliderShape::Box)
     {
-        if (colliderA->GetCollisionMapValue(colliderB->GetCollisionType()) &&
-            colliderB->GetCollisionMapValue(colliderA->GetCollisionType()))
+        if (colliderA->GetCollisionMapValue(colliderB->GetCollisionTag()) &&
+            colliderB->GetCollisionMapValue(colliderA->GetCollisionTag()))
         {
             return CheckCollision(dynamic_cast<BoxCollider*>(colliderA), dynamic_cast<BoxCollider*>(colliderB), result);
         }

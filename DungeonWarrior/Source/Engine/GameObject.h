@@ -15,13 +15,14 @@ public:
     GameObject();
     virtual ~GameObject() = default;
     
-    Transform* GetTransform()
+    std::shared_ptr<Transform> GetTransform()
     {
-        return m_Transform.lock().get();
+        return m_Transform.lock();
     }
 
 protected:
     virtual void Update() = 0;
+    virtual void LateUpdate();
     
     template<typename T>
     std::shared_ptr<T>& AddComponent()

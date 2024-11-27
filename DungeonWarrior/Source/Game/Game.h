@@ -4,6 +4,7 @@
 
 #include "Engine/EngineManager.h"
 
+class Obstacle;
 class Map;
 class Player;
 class MapManager;
@@ -43,6 +44,7 @@ private:
 
     // Game objects
     Player* m_Player;
+    Obstacle* m_Obstacle;
     Map* m_Map;
     
     ConfigHandler& m_ConfigHandler;

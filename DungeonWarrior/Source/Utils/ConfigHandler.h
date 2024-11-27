@@ -39,6 +39,14 @@ struct TileConfig
     float sizeY;
 };
 
+struct ObstacleConfig
+{
+    int textureIndex;
+
+    float sizeX;
+    float sizeY;
+};
+
 // Class
 class ConfigHandler
 {
@@ -51,21 +59,25 @@ public:
     MapsConfig& GetMapsConfig();
     TileConfig& GetTileConfig();
     WindowConfig& GetWindowConfig();
+    ObstacleConfig& GetObstacleConfig();
 
 private:
     const std::unique_ptr<std::string> PLAYER_CONFIG_PATH{ std::make_unique<std::string>("./Settings/PlayerConfig.json") };
     const std::unique_ptr<std::string> TILE_CONFIG_PATH{ std::make_unique<std::string>("./Settings/TileConfig.json") };
     const std::unique_ptr<std::string> WINDOW_CONFIG_PATH{ std::make_unique<std::string>("./Settings/WindowConfig.json") };
     const std::unique_ptr<std::string> MAP_CONFIG_PATH{ std::make_unique<std::string>("./Settings/MapsConfig.json") };
+    const std::unique_ptr<std::string> OBSTACLE_CONFIG_PATH{ std::make_unique<std::string>("./Settings/ObstaclesConfig.json") };
     
     void LoadPlayerConfigs();
     void LoadTileConfigs();
     void LoadWindowConfigs();
     void LoadMapConfigs(int mapId);
+    void LoadObstacleConfigs();
 
     PlayerConfig m_PlayerConfig;
     MapsConfig m_MapsConfig;
     TileConfig m_TileConfig;
     WindowConfig m_WindowConfig;
+    ObstacleConfig m_ObstacleConfig;
 };
 

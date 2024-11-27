@@ -21,11 +21,11 @@ void Map::SetupMap(const MapsConfig& mapConfig, const TileConfig& tileConfig)
 
             if (texturePath == m_FloorTexturePath)
             {
-                tile->SetupTile(texturePath.c_str(), CollisionTypes::FLOOR);
+                tile->SetupTile(texturePath.c_str(), CollisionTags::FLOOR);
             }
             else
             {
-                tile->SetupTile(texturePath.c_str(), CollisionTypes::WALL);
+                tile->SetupTile(texturePath.c_str(), CollisionTags::WALL);
             }
             
             m_Tiles.push_back(tile);

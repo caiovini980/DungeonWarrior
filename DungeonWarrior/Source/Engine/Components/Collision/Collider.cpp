@@ -8,22 +8,22 @@ Collider::Collider(E_ColliderShape newShape)
     : m_Transform(std::make_shared<Transform>())
     , m_Shape(newShape)
     , m_CollisionMap{
-        {CollisionTypes::WALL, false},
-        {CollisionTypes::PLAYER, false},
-        {CollisionTypes::FLOOR, false}
+        {CollisionTags::WALL, false},
+        {CollisionTags::PLAYER, false},
+        {CollisionTags::FLOOR, false}
     }
 {
     
 }
 
-void Collider::SetCollisionMapValue(const CollisionTypes type, const bool canCollide)
+void Collider::SetCollisionMapValue(const CollisionTags tag, const bool canCollide)
 {
-    m_CollisionMap[type] = canCollide;
+    m_CollisionMap[tag] = canCollide;
 }
 
-bool Collider::GetCollisionMapValue(CollisionTypes type)
+bool Collider::GetCollisionMapValue(CollisionTags tag)
 {
-    return m_CollisionMap[type];
+    return m_CollisionMap[tag];
 }
 
 void Collider::Update()

@@ -15,29 +15,31 @@ void Player::SetupPlayer(const PlayerConfig& config)
     m_Config = config;
     if (auto sprite = m_Sprite.lock())
     {
-        sprite->SetTexture((m_TexturesPaths)[m_Config.textureIndex].c_str());
+        sprite->SetTexture(m_TexturesPaths[m_Config.textureIndex].c_str());
     }
 
     if (auto collider = m_Collider.lock())
     {
-        collider->SetupCollider(CollisionTypes::PLAYER);
-        collider->SetCollisionMapValue(CollisionTypes::WALL, true);
+        collider->SetupCollider(CollisionTags::PLAYER);
+        collider->SetCollisionMapValue(CollisionTags::WALL, true);
+        collider->SetCollisionMapValue(CollisionTags::OBSTACLE, true);
     }
 }
 
 void Player::Update()
 {
     UpdatePosition();
-    
-    m_MovementDirection.m_X = 0.0f;
-    m_MovementDirection.m_Y = 0.0f;
-    
     GetTransform()->SetScale(m_Config.sizeX, m_Config.sizeY);
+}
+
+void Player::LateUpdate()
+{
+    GetTransform()->SetDirection(0.0f, 0.0f);
 }
 
 void Player::UpdatePosition()
 {
-    Vector2 normDir = m_MovementDirection.Normalized();
+    Vector2 normDir = GetTransform()->GetDirection().Normalized();
     normDir *= m_Config.speed;
     
     GetTransform()->AddPosition(normDir);
@@ -45,22 +47,22 @@ void Player::UpdatePosition()
 
 void Player::MoveRight()
 {
-    m_MovementDirection.m_X = 1;
+    GetTransform()->SetDirectionHorizontally(1);
 }
 
 void Player::MoveLeft()
 {
-    m_MovementDirection.m_X = -1;
+    GetTransform()->SetDirectionHorizontally(-1);
 }
 
 void Player::MoveUp()
 {
-    m_MovementDirection.m_Y = -1;
+    GetTransform()->SetDirectionVertically(-1);
 }
 
 void Player::MoveDown()
 {
-    m_MovementDirection.m_Y = 1;
+    GetTransform()->SetDirectionVertically(1);
 }
 
 BoxCollider& Player::GetCollider() const

@@ -10,11 +10,12 @@ Transform::Transform()
 
 void Transform::LateUpdate()
 {
-    m_PreviousPosition = m_Position;
 }
 
 void Transform::SetPosition(float x, float y)
 {
+    m_PreviousPosition = m_Position;
+    
     m_ResultRect.x = static_cast<int>(x);
     m_ResultRect.y = static_cast<int>(y);
 
@@ -46,6 +47,22 @@ void Transform::SetScale(const Vector2& newScale)
     SetScale(newScale.m_X, newScale.m_Y);
 }
 
+void Transform::SetDirection(float x, float y)
+{
+    Vector2 newDirection{x, y};
+    m_Direction = newDirection;
+}
+
+void Transform::SetDirectionHorizontally(float x)
+{
+    m_Direction.m_X = x;
+}
+
+void Transform::SetDirectionVertically(float y)
+{
+    m_Direction.m_Y = y;
+}
+
 const Vector2& Transform::GetPosition() const
 {
     return m_Position;
@@ -54,6 +71,11 @@ const Vector2& Transform::GetPosition() const
 const Vector2& Transform::GetSize() const
 {
     return m_Scale;
+}
+
+const Vector2& Transform::GetDirection() const
+{
+    return m_Direction;
 }
 
 SDL_Rect* Transform::GetSDLRect()

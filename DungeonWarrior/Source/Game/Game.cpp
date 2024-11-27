@@ -8,6 +8,7 @@
 #include "Game/Input/InputManager.h"
 #include "Game/Player/Player.h"
 #include "Game/Map/Map.h"
+#include "Game/Obstacles/Obstacle.h"
 
 Game::Game(ConfigHandler& configHandler)
      : m_ConfigHandler(configHandler), m_Config(configHandler.GetWindowConfig())
@@ -87,6 +88,9 @@ void Game::Init(const char* title, int xPosition, int yPosition, int width, int 
     
     m_Player = &gameManager.SpawnGameObject<Player>();
     m_Player->SetupPlayer(m_ConfigHandler.GetPlayerConfig());
+
+    m_Obstacle = &gameManager.SpawnGameObject<Obstacle>();
+    m_Obstacle->SetupObstacle(m_ConfigHandler.GetObstacleConfig());
 
     m_InputManager = std::make_shared<InputManager>(m_Player);
 }

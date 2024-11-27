@@ -17,7 +17,7 @@ public:
     Tile() = default;
     ~Tile() override = default;
     
-    void SetupTile(const char* texturePath, CollisionTypes collisionType);
+    void SetupTile(const char* texturePath, CollisionTags collisionTag);
     
     void SetTilePosition(const Vector2& newPosition) ;
     void SetTileSize(const Vector2& newSize) ;

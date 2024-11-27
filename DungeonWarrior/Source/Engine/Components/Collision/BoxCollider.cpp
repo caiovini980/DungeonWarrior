@@ -7,9 +7,9 @@ BoxCollider::BoxCollider() : Collider(E_ColliderShape::Box)
 {
 }
 
-void BoxCollider::SetupCollider(CollisionTypes collisionType)
+void BoxCollider::SetupCollider(CollisionTags collisionTag)
 {
-    SetCollisionType(collisionType);
+    SetCollisionTag(collisionTag);
     EngineManager::GetInstance().RegisterCollider(weak_from_this());
 }
 
